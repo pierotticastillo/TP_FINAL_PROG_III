@@ -1,0 +1,918 @@
+{
+	"info": {
+		"_postman_id": "96354f04-fb45-40d4-bff7-0a92b4b0e246",
+		"name": "Concesionaria 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34017001"
+	},
+	"item": [
+		{
+			"name": "USUARIOS",
+			"item": [
+				{
+					"name": "GET ALL USUARIOS 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USUARIOS 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios?nombre=a&apellido=a&limit=10&offset=0&order=apellido&asc=true",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "a"
+								},
+								{
+									"key": "apellido",
+									"value": "a"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "order",
+									"value": "apellido"
+								},
+								{
+									"key": "asc",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USUARIOS 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=5&offset=0&asc=true",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "asc",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USUARIOS 4",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=true",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "nombre"
+								},
+								{
+									"key": "asc",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USUARIOS Security",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=true",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "nombre"
+								},
+								{
+									"key": "asc",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID USUARIOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios/idUsuario",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"idUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST USUARIOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"?\",\r\n    \"apellido\":\"?\",\r\n    \"correoElectronico\":\"?\",\r\n    \"contrasenia\":\"?\",\r\n    \"idUsuarioTipo\":\"?\",\r\n    \"imagen\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH USUARIOS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"\",\r\n    \"apellido\":\"\",\r\n    \"correoElectronico\":\"\",\r\n    \"contrasenia\":\"\",\r\n    \"idUsuarioTipo\":\"\",\r\n    \"imagen\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USUARIOS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RECLAMOS",
+			"item": [
+				{
+					"name": "GET ALL RECLAMOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID RECLAMOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST RECLAMOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoEstado\":\"?\",\r\n    \"idReclamoTipo\":\"?\",\r\n    \"idUsuarioCreador\":\"?\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OFICINAS",
+			"item": [
+				{
+					"name": "GET ALL OFICINAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID OFICINAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST OFICINAS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH OFICINAS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE OFICINAS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RECLAMOS ESTADOS",
+			"item": [
+				{
+					"name": "GET ALL RECLAMOS ESTADOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamosestados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID RECLAMOS ESTADOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamosestados",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST RECLAMOS ESTADOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamosestados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH RECLAMOS ESTADOS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamosestados",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE RECLAMOS ESTADOS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamosestados",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RECLAMOS TIPOS",
+			"item": [
+				{
+					"name": "GET ALL RECLAMOS TIPOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamostipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID RECLAMOS TIPOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamostipos",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST RECLAMOS TIPOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamostipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH RECLAMOS TIPOS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamostipos",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE RECLAMOS TIPOS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamostipos",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USUARIOS OFICINAS",
+			"item": [
+				{
+					"name": "GET USUARIOS OFICINAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID USUARIOS OFICINAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST USUARIOS OFICINAS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":?,\r\n    \"idOficina\":?\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH USUARIOS OFICINAS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":?,\r\n    \"idOficina\":?\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USUARIOS OFICINAS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/?",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas",
+								""
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET INICIAL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/prueba",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"prueba"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
