@@ -34,7 +34,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?nombre=a&apellido=a&limit=10&offset=0&order=apellido&asc=true",
+							"raw": "{{BASE_URL}}/api/v1/usuarios?nombre=a&apellido=a&limit=10&offset=0&order=apellido&asc=DESC",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -66,7 +66,7 @@
 								},
 								{
 									"key": "asc",
-									"value": "true"
+									"value": "DESC"
 								}
 							]
 						}
@@ -79,7 +79,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=5&offset=0&asc=true",
+							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=5&offset=0&asc=ASC",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -99,7 +99,7 @@
 								},
 								{
 									"key": "asc",
-									"value": "true"
+									"value": "ASC"
 								}
 							]
 						}
@@ -112,7 +112,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=true",
+							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=DESC",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -128,7 +128,7 @@
 								},
 								{
 									"key": "asc",
-									"value": "true"
+									"value": "DESC"
 								}
 							]
 						}
