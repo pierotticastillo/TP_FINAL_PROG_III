@@ -1,6 +1,7 @@
 -- Cargar usuariostipo:
 INSERT INTO `usuariostipo` (`descripcion`) VALUES ('Administrador'),
 ('Empleado'), ('Cliente');
+
 --  Cargar usuarios:
 INSERT INTO `usuarios` (`nombre`, `apellido`, `correoElectronico`,
 `contrasenia`, `idUsuarioTipo`, `imagen`) VALUES
@@ -33,24 +34,29 @@ NULL),
 ('Jose', 'Battaglia', 'josbat@gmail.com',
 'c30d798692466db470eafebfb04c272b359c80f2ebbac6f51f6e9ff9b6e3177b', 3,
 NULL);
+
 -- Cargar reclamosestado:
 INSERT INTO `reclamosEstado` (`descripcion`) VALUES ('Creado'), ('En
 proceso'), ('Cancelado'), ('Finalizado');
+
 --  Cargar reclamostipo:
 INSERT INTO `reclamostipo` (`descripcion`)
 VALUES ('Falla de motor'), ('Falla de frenos'), ('Falla de suspensión'),
 ('Aprobación de cobertura'), ('Verificación de términos'), ('Reemplazo de piezas'),
 ('Reinstalación correcta'), ('Devolución'), ('Reembolsos'), ('Revisión de facturación');
+
 -- Cargar oficinas:
 INSERT INTO `oficinas` (`nombre`, `idReclamoTipo`) VALUES ('Dpto. de
 Taller y Servicio Técnico', 1), ('Dpto. de Garantías', 4), ('Dpto. de Repuestos y
 Partes', 6), ('Dpto. de Facturación', 9);
+
 -- Cargar usuariosoficinas:
 INSERT INTO `usuariosoficinas` (`idUsuario`, `idOficina`) VALUES
 (3, 1),
 (4, 2),
 (8, 3),
 (9, 4);
+
 -- Cargar reclamos:
 INSERT INTO `reclamos` (`asunto`, `descripcion`, `fechaCreado`,
 `fechaFinalizado`, `fechaCancelado`, `idReclamoEstado`, `idReclamoTipo`,
