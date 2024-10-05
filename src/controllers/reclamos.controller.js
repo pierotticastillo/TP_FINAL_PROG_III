@@ -26,7 +26,8 @@ export const getById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        const { asunto, descripcion, idReclamoEstado, idReclamoTipo, idUsuarioCreador } = req.body;
+        const { asunto, descripcion, idReclamoEstado, idReclamoTipo } = req.body;
+        const idUsuarioCreador = req.user.idUsuario; // Obtenemos el idUsuario desde el token JWT
         if (!asunto || !idReclamoEstado || !idReclamoTipo || !idUsuarioCreador) {
             return res.status(400).json({ estado: "Falla", mensaje: "Faltan campos obligatorios para crear un reclamo" });
         }

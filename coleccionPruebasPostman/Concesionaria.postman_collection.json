@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "96354f04-fb45-40d4-bff7-0a92b4b0e246",
-		"name": "Concesionaria 2",
+		"_postman_id": "c74c09df-7a20-4f75-b8db-9b18db1131e9",
+		"name": "Concesionaria",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34017001"
 	},
@@ -323,7 +323,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoEstado\":\"?\",\r\n    \"idReclamoTipo\":\"?\",\r\n    \"idUsuarioCreador\":\"?\"\r\n\r\n}",
+							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoEstado\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -888,6 +888,40 @@
 									"key": null,
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTENTICACIÓN",
+			"item": [
+				{
+					"name": "Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\":\"pierotticastillosa@gmail.com\",\r\n    \"contrasenia\":\"loquesea\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
 							]
 						}
 					},
