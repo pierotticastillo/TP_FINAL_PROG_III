@@ -33,7 +33,7 @@ app.use(`${apiV1}/auth`, authRoutes);
 // ! En caso de necesitar crear un usuario sin privilegios de autenticación y autorización por el cifrado de sha2
 // app.use(`${apiV1}/usuarios`,  usuariosRoutes);
 app.use(`${apiV1}/usuarios`, [authenticate, administradorMiddleware.esAdministrador], usuariosRoutes);
-app.use(`${apiV1}/reclamos`, reclamosRoutes);
+app.use(`${apiV1}/reclamos`, authenticate, reclamosRoutes);
 app.use(`${apiV1}/oficinas`, [authenticate, administradorMiddleware.esAdministrador], oficinasRoutes);
 app.use(`${apiV1}/reclamostipos`, [authenticate, administradorMiddleware.esAdministrador], reclamosTiposRoutes);
 app.use(`${apiV1}/reclamosestados`, [authenticate, administradorMiddleware.esAdministrador], reclamosEstadosRoutes);
