@@ -191,7 +191,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"?\",\r\n    \"apellido\":\"?\",\r\n    \"correoElectronico\":\"?\",\r\n    \"contrasenia\":\"?\",\r\n    \"idUsuarioTipo\":\"?\",\r\n    \"imagen\":\"\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"Enrique Alejandro\",\r\n    \"apellido\":\"Pierotti Castillo\",\r\n    \"correoElectronico\":\"pierotticastillo@gmail.com\",\r\n    \"contrasenia\":\"loquesea\",\r\n    \"idUsuarioTipo\":1,\r\n    \"imagen\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,6 +291,26 @@
 					"response": []
 				},
 				{
+					"name": "GET ALL MI RECLAMOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos/misreclamos",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos",
+								"misreclamos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET BY ID RECLAMOS",
 					"request": {
 						"method": "GET",
@@ -311,6 +331,91 @@
 									"key": null,
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH CANCELAR RECLAMOS BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjE3LCJlbWFpbCI6ImNvbnRyZXJhc3BhYmxvQGdtYWlsLmNvbSIsInVzdWFyaW9UaXBvIjoiQ2xpZW50ZSIsImlhdCI6MTcyODQxNzg5MSwiZXhwIjoxNzI4NDIxNDkxfQ.NOhTvaeQB-Xk7NSxz6YF1jN7CqDQLAhUiCPlpmKRBAw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReclamo\":14\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos/cancelarreclamo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos",
+								"cancelarreclamo"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH ACTUALIZAR RECLAMOS BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjE0LCJlbWFpbCI6Im1vbml6QGdtYWlsLmNvbSIsInVzdWFyaW9UaXBvIjoiRW1wbGVhZG8iLCJpYXQiOjE3Mjg0MTg1NDUsImV4cCI6MTcyODQyMjE0NX0._J9fhvkjGlxAUiSOg5XhMlTbOj9dXK6-MEO__YA8Ve0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReclamo\":15,\r\n    \"idReclamoEstado\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/reclamos/actualizarreclamo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reclamos",
+								"actualizarreclamo"
 							]
 						}
 					},
@@ -905,7 +1010,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"correoElectronico\":\"pierotticastillosa@gmail.com\",\r\n    \"contrasenia\":\"loquesea\"\r\n}",
+							"raw": "{\r\n    \"correoElectronico\":\"moniz@gmail.com\",\r\n    \"contrasenia\":\"loquesea\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
