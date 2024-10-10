@@ -20,9 +20,19 @@ export const getById = async (idUsuario) => {
     }
 };
 
-export const create = async (usuario) => {
+export const createByAdmin = async (usuario) => {
     try {
-        const createdUsuario = await usuariosDataBase.create(usuario);
+        const createdUsuario = await usuariosDataBase.createByAdmin(usuario);
+        return createdUsuario;
+    } catch (error) {
+        console.error("Error al crear el usuario en la base de datos:", error);
+        throw new Error("No se pudo crear el usuario en la base de datos");
+    }
+};
+
+export const createByCliente = async (usuario) => {
+    try {
+        const createdUsuario = await usuariosDataBase.createByCliente(usuario);
         return createdUsuario;
     } catch (error) {
         console.error("Error al crear el usuario en la base de datos:", error);

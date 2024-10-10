@@ -185,13 +185,23 @@
 					"response": []
 				},
 				{
-					"name": "POST USUARIOS",
+					"name": "POST USUARIOS ADMIN",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjg1MTkwNjksImV4cCI6MTcyODUyMjY2OX0.yRGY6_LxQLn6pKlWcOPwYliZSqhQ6cG_He5IwdMFDCw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"Enrique Alejandro\",\r\n    \"apellido\":\"Pierotti Castillo\",\r\n    \"correoElectronico\":\"pierotticastillo@gmail.com\",\r\n    \"contrasenia\":\"loquesea\",\r\n    \"idUsuarioTipo\":1,\r\n    \"imagen\":\"\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"Tyrone\",\r\n    \"apellido\":\"McMiller\",\r\n    \"correoElectronico\":\"mcmillerty@gmail.com\",\r\n    \"contrasenia\":\"loquesea\",\r\n    \"imagen\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,14 +209,54 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/crearempleado",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"usuarios"
+								"usuarios",
+								"crearempleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST USUARIOS CLIENTE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjg1MTkwNjksImV4cCI6MTcyODUyMjY2OX0.yRGY6_LxQLn6pKlWcOPwYliZSqhQ6cG_He5IwdMFDCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Tyrone\",\r\n    \"apellido\":\"McMiller\",\r\n    \"correoElectronico\":\"mcmillerty@gmail.com\",\r\n    \"contrasenia\":\"loquesea\",\r\n    \"imagen\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios/crearcliente",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"crearcliente"
 							]
 						}
 					},
@@ -227,14 +277,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/modificarempleado",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"usuarios"
+								"usuarios",
+								"modificarempleado"
 							]
 						}
 					},
@@ -916,7 +967,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idUsuario\":?,\r\n    \"idOficina\":?\r\n}",
+							"raw": "{\r\n    \"idUsuario\":45,\r\n    \"idOficina\":46\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

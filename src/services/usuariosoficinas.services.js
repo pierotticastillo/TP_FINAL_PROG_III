@@ -1,5 +1,6 @@
 import * as usuariosOficinasDataBase from "../dataBase/usuariosOficinas.db.js";
-
+import * as usuariosServices from "../services/usuarios.services.js";
+import * as oficinaServices from "../services/oficinas.services.js";
 export const getAll = async () => {
     try {
         const allUsuariosOficinas = await usuariosOficinasDataBase.getAll();
@@ -22,6 +23,15 @@ export const getById = async (idUsuarioOficina) => {
 
 export const create = async (usuarioOficina) => {
     try {
+        const usuario = await usuariosServices.getById(usuarioOficina.idUsuario);
+        // Comprueba si el usuario tiene el rol de empleado
+        if (usuario.idUsuarioTipo !== 'Empleado') { // Ajusta la verificación según cómo se define el rol de empleado
+            throw new Error('El usuario no tiene el rol de empleado');
+        }
+        const oficina = await oficinaServices.getById(usuarioOficina.idOficina)
+        if (!oficina || oficina.length === 0) {
+            throw new Error('La oficina no existe o está inactiva');
+        }
         const createdUsuarioOficina = await usuariosOficinasDataBase.create(usuarioOficina);
         return createdUsuarioOficina;
     } catch (error) {

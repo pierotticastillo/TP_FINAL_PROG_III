@@ -35,10 +35,10 @@ export const getById = async (req, res) => {
     }
 };
 
-export const create = async (req, res) => {
+export const createByAdmin = async (req, res) => {
     try {
-        const { nombre, apellido, correoElectronico, contrasenia, idUsuarioTipo, imagen } = req.body;
-        if (!nombre || !apellido || !correoElectronico || !contrasenia || !idUsuarioTipo) {
+        const { nombre, apellido, correoElectronico, contrasenia, imagen } = req.body;
+        if (!nombre || !apellido || !correoElectronico || !contrasenia) {
             return res.status(400).json({ estado: "Falla", mensaje: "Faltan campos obligatorios para registrar al usuario" });
         }
         const usuario = {
@@ -46,10 +46,30 @@ export const create = async (req, res) => {
             apellido,
             correoElectronico,
             contrasenia,
-            idUsuarioTipo: parseInt(idUsuarioTipo),
             imagen: imagen === "" ? null : imagen
         };
-        const usuarioCreado = await usuariosServices.create(usuario);
+        const usuarioCreado = await usuariosServices.createByAdmin(usuario);
+        res.status(201).json({ estado: "OK", mensaje: "El usuario fue creado exitosamente", dato: usuarioCreado });
+    } catch (error) {
+        console.error("Error en el servidor:", error);
+        res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });
+    }
+};
+
+export const createByCliente = async (req, res) => {
+    try {
+        const { nombre, apellido, correoElectronico, contrasenia, imagen } = req.body;
+        if (!nombre || !apellido || !correoElectronico || !contrasenia) {
+            return res.status(400).json({ estado: "Falla", mensaje: "Faltan campos obligatorios para registrar al usuario" });
+        }
+        const usuario = {
+            nombre,
+            apellido,
+            correoElectronico,
+            contrasenia,
+            imagen: imagen === "" ? null : imagen
+        };
+        const usuarioCreado = await usuariosServices.createByCliente(usuario);
         res.status(201).json({ estado: "OK", mensaje: "El usuario fue creado exitosamente", dato: usuarioCreado });
     } catch (error) {
         console.error("Error en el servidor:", error);
@@ -60,7 +80,7 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const idUsuario = req.params.idUsuario;
-        const { nombre, apellido, correoElectronico, contrasenia, idUsuarioTipo, imagen } = req.body;
+        const { nombre, apellido, correoElectronico, contrasenia, imagen } = req.body;
         if (!idUsuario) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del usuario que desea actualizar" });
         }
@@ -69,7 +89,6 @@ export const update = async (req, res) => {
         if (apellido) usuario.apellido = apellido;
         if (correoElectronico) usuario.correoElectronico = correoElectronico;
         if (contrasenia) usuario.contrasenia = contrasenia;
-        if (idUsuarioTipo) usuario.idUsuarioTipo = parseInt(idUsuarioTipo);
         usuario.imagen = imagen === "" ? null : imagen;
         const usuarioActualizado = await usuariosServices.update(idUsuario, usuario);
         res.status(200).json({ estado: "OK", mensaje: "Usuario actualizado exitosamente", dato: usuarioActualizado });

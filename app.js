@@ -15,6 +15,7 @@ import reclamosEstadosRoutes from './src/v1/routes/reclamosestados.routes.js';
 // Import middleware
 import * as administradorMiddleware from './src/middlewares/esAdministrador.js'
 import validateContentType from './src/middlewares/validateContentType.js';
+
 const app = express();
 
 app.use(express.json());
@@ -32,7 +33,7 @@ app.use(apiV1, indexRoutes);
 app.use(`${apiV1}/auth`, authRoutes);
 // ! En caso de necesitar crear un usuario sin privilegios de autenticación y autorización por el cifrado de sha2
 // app.use(`${apiV1}/usuarios`,  usuariosRoutes);
-app.use(`${apiV1}/usuarios`, [authenticate, administradorMiddleware.esAdministrador], usuariosRoutes);
+app.use(`${apiV1}/usuarios`, usuariosRoutes);
 app.use(`${apiV1}/reclamos`, authenticate, reclamosRoutes);
 app.use(`${apiV1}/oficinas`, [authenticate, administradorMiddleware.esAdministrador], oficinasRoutes);
 app.use(`${apiV1}/reclamostipos`, [authenticate, administradorMiddleware.esAdministrador], reclamosTiposRoutes);

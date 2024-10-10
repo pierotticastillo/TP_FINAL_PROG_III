@@ -3,7 +3,7 @@ import pool from '../dataBase/dataBase.js';
 export const getAll = async (parameters) => {
     try {
         let consulta = `
-            SELECT u.idUsuario, u.nombre, u.apellido, u.correoelectronico, u.contrasenia, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo 
+            SELECT u.idUsuario, u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo 
             WHERE u.activo = 1`;
         const conditions = [];
         const values = [];
@@ -31,7 +31,7 @@ export const getAll = async (parameters) => {
 export const getById = async (idUsuario) => {
     try {
         const [usuarioExistente] = await pool.query(`
-            SELECT u.nombre, u.apellido, u.correoelectronico, u.contrasenia, ut.descripcion AS idUsuarioTipo, u.imagen, u.activo 
+            SELECT u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.imagen, u.activo 
             FROM usuarios u 
             INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo 
             WHERE u.idUsuario = ?`, [idUsuario]);
@@ -48,9 +48,19 @@ export const getById = async (idUsuario) => {
     }
 };
 
-export const create = async (usuario) => {
+export const createByAdmin = async (usuario) => {
     try {
-        const [consulta] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idUsuarioTipo, imagen) VALUES (?, ?, ?, sha2(?, 256), ?, ?);`, [usuario.nombre, usuario.apellido, usuario.correoElectronico, usuario.contrasenia, usuario.idUsuarioTipo, usuario.imagen || null]);
+        const [consulta] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idUsuarioTipo, imagen) VALUES (?, ?, ?, sha2(?, 256), 2, ?);`, [usuario.nombre, usuario.apellido, usuario.correoElectronico, usuario.contrasenia, usuario.imagen || null]);
+        return await getById(consulta.insertId);
+    } catch (error) {
+        console.error("Error al crear el usuario en la base de datos:", error.message);
+        throw new Error('No se pudo crear el usuario en la base de datos');
+    }
+};
+
+export const createByCliente = async (usuario) => {
+    try {
+        const [consulta] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idUsuarioTipo, imagen) VALUES (?, ?, ?, sha2(?, 256), 3, ?);`, [usuario.nombre, usuario.apellido, usuario.correoElectronico, usuario.contrasenia, usuario.imagen || null]);
         return await getById(consulta.insertId);
     } catch (error) {
         console.error("Error al crear el usuario en la base de datos:", error.message);
@@ -67,6 +77,7 @@ export const update = async (idUsuario, usuario) => {
         if (usuarioExistente[0].activo === 0) {
             throw new Error("El usuario está inactivo y no puede ser actualizado");
         }
+        // Crear dinámicamente la consulta de actualización
         let campos = [];
         let valores = [];
         if (usuario.nombre) {
@@ -84,10 +95,6 @@ export const update = async (idUsuario, usuario) => {
         if (usuario.contrasenia) {
             campos.push("contrasenia = sha2(?, 256)");
             valores.push(usuario.contrasenia);
-        }
-        if (usuario.idUsuarioTipo) {
-            campos.push("idUsuarioTipo = ?");
-            valores.push(usuario.idUsuarioTipo);
         }
         if (usuario.imagen !== undefined) {
             campos.push("imagen = ?");
@@ -114,7 +121,7 @@ export const update = async (idUsuario, usuario) => {
 
 export const destroy = async (idUsuario) => {
     try {
-        const [usuarioExistente] = await pool.query(`SELECT u.nombre, u.apellido, u.correoelectronico, u.contrasenia, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo WHERE u.idUsuario = ?;`, [idUsuario]);
+        const [usuarioExistente] = await pool.query(`SELECT u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo WHERE u.idUsuario = ?;`, [idUsuario]);
         if (usuarioExistente.length === 0) {
             throw new Error("Usuario no encontrado");
         }
