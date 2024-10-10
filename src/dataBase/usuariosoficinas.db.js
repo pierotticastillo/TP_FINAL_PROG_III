@@ -2,7 +2,7 @@ import pool from '../dataBase/dataBase.js';
 
 export const getAll = async () => {
     try {
-        const [consulta] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.activo = 1;`);
+        const [consulta] = await pool.query(`SELECT uo.idUsuarioOficina, u.idUsuario,u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.idOficina,o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.activo = 1;;`);
         return consulta;
     } catch (error) {
         console.error("Error al obtener todos los usuarios en la base de datos:", error.message);

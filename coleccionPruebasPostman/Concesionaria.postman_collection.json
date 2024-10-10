@@ -479,7 +479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoEstado\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n\r\n}",
+							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoTipo\":\"?\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

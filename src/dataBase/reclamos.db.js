@@ -63,7 +63,7 @@ export const getById = async (idReclamo) => {
 export const create = async (reclamo) => {
     try {
         const [consulta] = await pool.query(`INSERT INTO reclamos (asunto, descripcion, fechaCreado, idReclamoEstado, idReclamoTipo, idUsuarioCreador) 
-        VALUES(?, ?, NOW(), ?, ?, ?)`, [reclamo.asunto, reclamo.descripcion, reclamo.idReclamoEstado, reclamo.idReclamoTipo, reclamo.idUsuarioCreador]);
+        VALUES(?, ?, NOW(), 1, ?, ?)`, [reclamo.asunto, reclamo.descripcion, reclamo.idReclamoTipo, reclamo.idUsuarioCreador]);
         return await getById(consulta.insertId);
     } catch (error) {
         console.error("Error al crear el reclamo en la base de datos:", error.message);
