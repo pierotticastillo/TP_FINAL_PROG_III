@@ -28,6 +28,10 @@ export const passportValidity = new JwtStrategy({
     secretOrKey: config.JWT_SECRET
 },
     async (jwtPayload, done) => {
+        const currentTime = Math.floor(Date.now() / 1000);
+        if (jwtPayload.exp < currentTime) {
+            return done(null, false, { message: 'El token ha expirado.' });
+        }
         const user = await authServices.findById(jwtPayload.idUsuario);
         if (user) {
             return done(null, user);
