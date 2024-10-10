@@ -2,7 +2,7 @@ import pool from '../dataBase/dataBase.js';
 
 export const getAll = async () => {
     try {
-        const [consulta] = await pool.query(`SELECT * FROM usuariosoficinas WHERE activo = 1;`);
+        const [consulta] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.activo = 1;`);
         return consulta;
     } catch (error) {
         console.error("Error al obtener todos los usuarios en la base de datos:", error.message);
@@ -12,7 +12,7 @@ export const getAll = async () => {
 
 export const getById = async (idUsuarioOficina) => {
     try {
-        const [usuarioOficinaExistente] = await pool.query(`SELECT * FROM usuariosoficinas WHERE idUsuarioOficina =? AND activo = 1`, [idUsuarioOficina]);
+        const [usuarioOficinaExistente] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.idUsuarioOficina = ? AND uo.activo = 1;`, [idUsuarioOficina]);
         if (usuarioOficinaExistente.length === 0) {
             throw new Error('El usuario oficina no existe');
         }
@@ -29,7 +29,7 @@ export const getById = async (idUsuarioOficina) => {
 export const create = async (usuarioOficina) => {
     try {
         const [consulta] = await pool.query(`INSERT INTO usuariosoficinas (idUsuario, idOficina) VALUES (?,?)`, [usuarioOficina.idUsuario, usuarioOficina.idOficina]);
-        return getById(consulta.insertId);
+        return await getById(consulta.insertId);
     } catch (error) {
         console.error("Error al crear el usuario en la base de datos:", error.message);
         throw new Error('No se pudo crear el usuario en la base de datos');
@@ -38,7 +38,7 @@ export const create = async (usuarioOficina) => {
 
 export const update = async (idUsuarioOficina, usuarioOficina) => {
     try {
-        const [usuarioOficinaExistente] = await pool.query(`SELECT * FROM usuariosoficinas WHERE idUsuarioOficina = ?`, [idUsuarioOficina]);
+        const [usuarioOficinaExistente] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.idUsuarioOficina = ?`, [idUsuarioOficina]);
         if (usuarioOficinaExistente.length === 0) {
             throw new Error('El usuario oficina no existe');
         }
@@ -58,7 +58,7 @@ export const update = async (idUsuarioOficina, usuarioOficina) => {
 
 export const destroy = async (idUsuarioOficina) => {
     try {
-        const [usuarioOficinaExistente] = await pool.query(`SELECT * FROM usuariosoficinas WHERE idUsuarioOficina = ?`, [idUsuarioOficina]);
+        const [usuarioOficinaExistente] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.idUsuarioOficina = ?`, [idUsuarioOficina]);
         if (usuarioOficinaExistente.length === 0) {
             throw new Error('El usuario oficina no existe');
         }
