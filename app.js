@@ -1,6 +1,7 @@
 // Import libraries
 import express from 'express';
 import passport from 'passport';
+import morgan from 'morgan';
 // Import passport configuration
 import * as configPassport from "./src/config/passport.js"
 // Import routes
@@ -17,6 +18,7 @@ import * as administradorMiddleware from './src/middlewares/esAdministrador.js'
 import validateContentType from './src/middlewares/validateContentType.js';
 
 const app = express();
+app.use(morgan("combined"));
 
 app.use(express.json());
 app.use(validateContentType)
