@@ -3,6 +3,7 @@ import passport from 'passport';
 import * as usuariosController from '../../controllers/usuarios.controller.js';
 import * as administradorMiddleware from '../../middlewares/esAdministrador.js';
 import * as empleadoMiddleware from '../../middlewares/esEmpleado.js';
+import * as clienteMiddleware from '../../middlewares/esCliente.js';
 import { check } from 'express-validator';
 import { validarCampos } from '../../middlewares/validarCampos.js';
 
@@ -67,6 +68,8 @@ router.post('/creacioncliente',
 
 // Modificar usuario
 router.patch('modificacionempleado', [authenticate, empleadoMiddleware.esEmpleado], usuariosController.update);
+
+router.patch('modificacioncliente', [authenticate, clienteMiddleware.esCliente], usuariosController.update);
 
 // Eliminado lógico de un usuario, es decir, va a ser cambiado a 0 el campo activo del registro del usuario
 router.delete('/:idUsuario', [authenticate, administradorMiddleware.esAdministrador], usuariosController.destroy);

@@ -292,6 +292,35 @@
 					"response": []
 				},
 				{
+					"name": "PATCH CLIENTE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"\",\r\n    \"apellido\":\"\",\r\n    \"correoElectronico\":\"\",\r\n    \"contrasenia\":\"\",\r\n    \"imagen\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuarios/modificacioncliente",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"modificacioncliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DELETE USUARIOS",
 					"request": {
 						"method": "DELETE",
