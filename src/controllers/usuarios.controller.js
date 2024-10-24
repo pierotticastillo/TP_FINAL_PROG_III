@@ -79,7 +79,7 @@ export const createByCliente = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const idUsuario = req.params.idUsuario;
+        const idUsuario = req.user.idUsuario;
         const { nombre, apellido, correoElectronico, contrasenia, imagen } = req.body;
         if (!idUsuario) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del usuario que desea actualizar" });
