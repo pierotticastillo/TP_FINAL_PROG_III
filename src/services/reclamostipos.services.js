@@ -32,6 +32,7 @@ export const create = async(descripcion) => {
 
 export const update = async(idReclamoTipo, descripcion) => {
     try {
+        await getById(idReclamoTipo)
         const updatedReclamoTipo = await reclamosTiposDataBase.update(idReclamoTipo, descripcion);
         return updatedReclamoTipo;
     } catch (error) {
@@ -42,6 +43,7 @@ export const update = async(idReclamoTipo, descripcion) => {
 
 export const destroy = async(idReclamoTipo) => {
     try {
+        await getById(idReclamoTipo);
         const destroyedReclamoTipo = await reclamosTiposDataBase.destroy(idReclamoTipo);
         return destroyedReclamoTipo;
     } catch (error) {

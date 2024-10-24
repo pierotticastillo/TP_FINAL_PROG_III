@@ -2,7 +2,7 @@ import pool from '../dataBase/dataBase.js';
 
 export const getAllByEmployee = async (idUsuario) => {
     try {
-        const [consulta] = await pool.query(`SELECT u.nombre, o.idOficina, o.nombre, r.asunto, r.fechaCreado, rt.descripcion FROM usuariosoficinas AS uo
+        const [consulta] = await pool.query(`SELECT u.nombre, o.idOficina, o.nombre, r.idReclamo, r.asunto, r.fechaCreado, rt.descripcion FROM usuariosoficinas AS uo
         INNER JOIN usuarios AS u ON u.idUsuario = uo.idUsuario
         INNER JOIN oficinas AS o ON o.idOficina = uo.idOficina
         INNER JOIN reclamostipo AS rt ON rt.idReclamoTipo = o.idReclamoTipo
@@ -42,7 +42,7 @@ export const getAllByUser = async (idUsuario) => {
 export const getById = async (idReclamo) => {
     try {
         const [reclamoExistente] = await pool.query(`SELECT r.idReclamo, r.asunto, r.descripcion, r.fechaCreado, r.fechaCancelado, r.fechafinalizado, 
-        rt.descripcion AS tipoReclamo, re.descripcion AS estadoReclamo, 
+        rt.descripcion AS tipoReclamo, re.descripcion AS estadoReclamo, idUsuarioCreador, 
         uC.nombre AS creadorNombre, uF.nombre AS finalizadorNombre 
         FROM reclamos r 
         INNER JOIN reclamosTipo rt ON r.idReclamoTipo = rt.idReclamoTipo 
@@ -79,7 +79,7 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
         if (updatedReclamo.affectedRows === 0) {
             throw new Error("No se puede cancelar el reclamo porque no está en estado 'creado'");
         }
-        return updatedReclamo;
+        return await getById(idReclamo);
     } catch (error) {
         console.error("Error al cancelar el reclamo en la base de datos:", error.message);
         throw new Error("No se pudo cancelar el reclamo en la base de datos");
@@ -89,6 +89,17 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
 
 export const updateEmployee = async (idReclamo, estado, idUsuario) => {
     try {
+        const [tipoReclamo] = await pool.query(
+            `SELECT * FROM usuariosOficinas AS uo
+            INNER JOIN oficinas AS o ON o.idOficina = uo.idOficina
+            INNER JOIN reclamosTipo AS rt ON rt.idReclamoTipo = o.idReclamoTipo
+            WHERE uo.idUsuario = ? AND rt.idReclamoTipo = (SELECT idReclamoTipo FROM reclamos WHERE idReclamo = ?)`,
+            [idUsuario, idReclamo]
+        );
+
+        if (tipoReclamo.length === 0) {
+            throw new Error("El empleado no pertenece a la oficina con el tipo de reclamo asignado.");
+        }
         let query;
         let params;
         if (estado === 2) {
@@ -99,12 +110,12 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
             query = `UPDATE reclamos SET idReclamoEstado = ?, fechaFinalizado = NOW(), idUsuarioFinalizador = ? WHERE idReclamo = ? AND idReclamoEstado != 3;`;
             params = [estado, idUsuario, idReclamo];
         }
-        const result = await pool.query(query, params);
+        const [result] = await pool.query(query, params);
         // Verificación de si se actualizó el reclamo
         if (result.affectedRows === 0) {
             throw new Error("No se encontró el reclamo o no se pudo actualizar.");
         }
-        return result;
+        return await getById(idReclamo);
     } catch (error) {
         console.error("Error al actualizar el estado del reclamo:", error.message);
         throw new Error("No se pudo actualizar el estado del reclamo en la base de datos.");

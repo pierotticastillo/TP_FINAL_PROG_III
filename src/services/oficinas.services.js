@@ -1,4 +1,5 @@
 import * as oficinaDataBase from "../dataBase/oficinas.db.js"
+import * as reclamoTipoService from "../services/reclamostipos.services.js"
 
 export const getAll = async ()=>{
     try {
@@ -22,6 +23,14 @@ export const getById = async (idOficina) => {
 
 export const create = async (oficina) => {
     try {
+        await reclamoTipoService.getById(oficina.idReclamoTipo);
+        const allOficinas = await getAll();
+        const oficinaConTipoReclamo = allOficinas.find(
+            (o) => o.idReclamoTipo === oficina.idReclamoTipo
+        );        
+        if (oficinaConTipoReclamo) {
+            throw new Error("Ya existe una oficina con el tipo de reclamo");
+        }
         const createdOficina = await oficinaDataBase.create(oficina);
         return createdOficina;
     } catch (error) {
@@ -32,6 +41,15 @@ export const create = async (oficina) => {
 
 export const update = async (idOficina, oficina) => {
     try {
+        await getById(idOficina);
+        await reclamoTipoService.getById(oficina.idReclamoTipo);
+        const allOficinas = await getAll();
+        const oficinaConTipoReclamo = allOficinas.find(
+            (o) => o.idReclamoTipo === oficina.idReclamoTipo
+        );        
+        if (oficinaConTipoReclamo) {
+            throw new Error("Ya existe una oficina con el tipo de reclamo");
+        }        
         const updatedOficina = await oficinaDataBase.update(idOficina, oficina);
         return updatedOficina;
     } catch (error) {
@@ -41,7 +59,8 @@ export const update = async (idOficina, oficina) => {
 };
 
 export const destroy = async (idOficina) => {
-    try {
+    try {        
+        await getById(idOficina);
         const destroyedOficina = await oficinaDataBase.destroy(idOficina);
         return destroyedOficina;
     } catch (error) {

@@ -47,6 +47,21 @@ export const create = async (usuarioOficina) => {
 
 export const update = async (idUsuarioOficina, usuarioOficina) => {
     try {
+        await getById(idUsuarioOficina);
+        const usuario = await usuariosServices.getById(usuarioOficina.idUsuario);
+        // Comprueba si el usuario tiene el rol de empleado
+        if (usuario.idUsuarioTipo !== 'Empleado') { // Ajusta la verificación según cómo se define el rol de empleado
+            throw new Error('El usuario no tiene el rol de empleado');
+        }
+        const oficina = await oficinaServices.getById(usuarioOficina.idOficina)
+        if (!oficina || oficina.length === 0) {
+            throw new Error('La oficina no existe o está inactiva');
+        }
+        const allUsuariosOficinas = await getAll();
+        const existeEmpleadoOficina = allUsuariosOficinas.find((uo) => uo.idUsuario === usuarioOficina.idUsuario && uo.idOficina === usuarioOficina.idOficina);
+        if (existeEmpleadoOficina) {
+            throw new Error('El empleado ya pertenece a esta oficina');
+        }
         const updatedUsuarioOficina = await usuariosOficinasDataBase.update(idUsuarioOficina, usuarioOficina);
         return updatedUsuarioOficina;
     } catch (error) {

@@ -70,13 +70,6 @@ export const createByCliente = async (usuario) => {
 
 export const update = async (idUsuario, usuario) => {
     try {
-        const [usuarioExistente] = await pool.query(`SELECT * FROM usuarios WHERE idUsuario = ?`, [idUsuario]);
-        if (usuarioExistente.length === 0) {
-            throw new Error("Usuario no encontrado");
-        }
-        if (usuarioExistente[0].activo === 0) {
-            throw new Error("El usuario está inactivo y no puede ser actualizado");
-        }
         // Crear dinámicamente la consulta de actualización
         let campos = [];
         let valores = [];
@@ -121,18 +114,11 @@ export const update = async (idUsuario, usuario) => {
 
 export const destroy = async (idUsuario) => {
     try {
-        const [usuarioExistente] = await pool.query(`SELECT u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo WHERE u.idUsuario = ?;`, [idUsuario]);
-        if (usuarioExistente.length === 0) {
-            throw new Error("Usuario no encontrado");
-        }
-        if (usuarioExistente[0].activo === 0) {
-            throw new Error("El usuario está inactivo y no puede ser eliminado");
-        }
         const [consulta] = await pool.query(`UPDATE usuarios SET activo = 0 WHERE idUsuario = ?`, [idUsuario]);
         if (consulta.affectedRows === 0) {
             throw new Error("No se pudo eliminar el usuario");
         }
-        return usuarioExistente;
+        return true;
     } catch (error) {
         console.error("Error al eliminar el usuario en la base de datos:", error);
         throw new Error("Error al eliminar el usuario en la base de datos");

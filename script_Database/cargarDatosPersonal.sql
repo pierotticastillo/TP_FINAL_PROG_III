@@ -73,26 +73,33 @@ NULL),
 ('falla tren delantero', 'empece a notar ruidos molesto', '2024-08-28 19:26:12',
 NULL, NULL, 1, 1, 8, NULL);
 
--- Cargar procedimiento almacenado de ejemplo:
+-- Cargar procedimiento almacenado de ejemplo para obtener estaditicas de los reclamos en relación al estado en que se encuentran:
 
 /* DELIMITER $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `totalesreclamosestados` ()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerReclamosEstados` ()
 BEGIN
-    DECLARE v_descripcion VARCHAR(256);
-    DECLARE v_cantidad INT;
-
-    -- Ejecutar la consulta y almacenar los resultados en variables locales
-    SELECT re.descripcion, COUNT(r.idReclamo)
-    INTO v_descripcion, v_cantidad
+    -- Mostrar los totales de reclamos agrupados por estado
+    SELECT re.descripcion AS descripcion, COUNT(r.idReclamo) AS cantidad
     FROM `reclamos` AS r
     INNER JOIN `reclamosestado` AS re ON re.idReclamoEstado = r.idReclamoEstado
-    GROUP BY re.descripcion
-    LIMIT 1;
-
-    -- Mostrar los resultados
-    SELECT v_descripcion AS descripcion, v_cantidad AS cantidad;
+    GROUP BY re.descripcion;
 END $$
 
-DELIMITER ; */
- 
+DELIMITER ;
+*/
+
+-- Cargar procedimiento almacenado de ejemplo para obtener la cantidad de usuarios que existen de cada tipo:
+/*
+DELIMITER //
+
+CREATE PROCEDURE obtenerUsuarioTipo()
+BEGIN
+    SELECT ut.descripcion, COUNT(u.idUsuario) as cantidad_usuarios
+    FROM usuarios u
+    INNER JOIN usuariosTipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo
+    GROUP BY ut.descripcion;
+END //
+
+DELIMITER ;
+*/

@@ -209,7 +209,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios/crearempleado",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/creacionempleado",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -217,7 +217,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"crearempleado"
+								"creacionempleado"
 							]
 						}
 					},
@@ -248,7 +248,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios/crearcliente",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/creacioncliente",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -256,7 +256,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"crearcliente"
+								"creacioncliente"
 							]
 						}
 					},
@@ -269,7 +269,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"\",\r\n    \"apellido\":\"\",\r\n    \"correoElectronico\":\"\",\r\n    \"contrasenia\":\"\",\r\n    \"idUsuarioTipo\":\"\",\r\n    \"imagen\":\"\"\r\n}",
+							"raw": "{\r\n    \"nombre\":\"\",\r\n    \"apellido\":\"\",\r\n    \"correoElectronico\":\"\",\r\n    \"contrasenia\":\"\",\r\n    \"imagen\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -277,7 +277,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios/modificarempleado",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/modificacionempleado",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -285,7 +285,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"modificarempleado"
+								"modificacionempleado"
 							]
 						}
 					},
@@ -412,7 +412,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamos/cancelarreclamo",
+							"raw": "{{BASE_URL}}/api/v1/reclamos/cancelacionreclamo",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -420,7 +420,7 @@
 								"api",
 								"v1",
 								"reclamos",
-								"cancelarreclamo"
+								"cancelacionreclamo"
 							],
 							"query": [
 								{
@@ -458,7 +458,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamos/actualizarreclamo",
+							"raw": "{{BASE_URL}}/api/v1/reclamos/actualizacionreclamo",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -466,7 +466,7 @@
 								"api",
 								"v1",
 								"reclamos",
-								"actualizarreclamo"
+								"actualizacionreclamo"
 							]
 						}
 					},
@@ -689,7 +689,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"raw": "{\r\n    \"descripcion\":\"En alerta\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1061,7 +1061,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"correoElectronico\":\"moniz@gmail.com\",\r\n    \"contrasenia\":\"loquesea\"\r\n}",
+							"raw": "{\r\n    \"correoElectronico\":\"pierotticastillosa@gmail.com\",\r\n    \"contrasenia\":\"loquesea\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1078,6 +1078,105 @@
 								"v1",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ESTADISTICA",
+			"item": [
+				{
+					"name": "PDF",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjk3NzI0MDQsImV4cCI6MTcyOTc3NjAwNH0.U_hx0JV_WipclfIXa4RVdV125ktiWuWefNGhyaQ0XxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/estadistica/informacion/reclamos/pdf",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"estadistica",
+								"informacion",
+								"reclamos",
+								"pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSV",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjk3NzI0MDQsImV4cCI6MTcyOTc3NjAwNH0.U_hx0JV_WipclfIXa4RVdV125ktiWuWefNGhyaQ0XxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/estadistica/informacion/reclamos/csv",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"estadistica",
+								"informacion",
+								"reclamos",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procedimiento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjk3NzI0MDQsImV4cCI6MTcyOTc3NjAwNH0.U_hx0JV_WipclfIXa4RVdV125ktiWuWefNGhyaQ0XxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/estadistica/informacion",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"estadistica",
+								"informacion"
 							]
 						}
 					},

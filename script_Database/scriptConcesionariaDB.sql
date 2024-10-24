@@ -77,3 +77,22 @@ ALTER TABLE `reclamos` ADD CONSTRAINT `reclamos_fk7` FOREIGN KEY (`idReclamoTipo
 ALTER TABLE `reclamos` ADD CONSTRAINT `reclamos_fk8` FOREIGN KEY (`idUsuarioCreador`) REFERENCES `usuarios`(`idUsuario`);
 
 ALTER TABLE `reclamos` ADD CONSTRAINT `reclamos_fk9` FOREIGN KEY (`idUsuarioFinalizador`) REFERENCES `usuarios`(`idUsuario`);
+
+-- Procedimiento almacenado para las estadisticas
+
+DELIMITER $$
+
+CREATE PROCEDURE obtenerReclamosPorEstado()
+BEGIN
+    SELECT 
+        re.descripcion AS Estado, 
+        COUNT(r.idReclamo) AS Total
+    FROM 
+        reclamos AS r
+    INNER JOIN 
+        reclamosestado AS re ON r.idReclamoEstado = re.idReclamoEstado
+    GROUP BY 
+        re.descripcion;
+END $$
+
+DELIMITER ;

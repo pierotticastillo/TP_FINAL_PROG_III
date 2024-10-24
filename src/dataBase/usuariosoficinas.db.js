@@ -37,19 +37,12 @@ export const create = async (usuarioOficina) => {
 };
 
 export const update = async (idUsuarioOficina, usuarioOficina) => {
-    try {
-        const [usuarioOficinaExistente] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.idUsuarioOficina = ?`, [idUsuarioOficina]);
-        if (usuarioOficinaExistente.length === 0) {
-            throw new Error('El usuario oficina no existe');
-        }
-        if (usuarioOficinaExistente[0].activo === 0) {
-            throw new Error('El usuario oficina no está inactivo y no puede ser actualizado');
-        }
+    try {        
         const [consulta] = await pool.query(`UPDATE usuariosoficinas SET idUsuario = ?, idOficina = ? WHERE idUsuarioOficina = ?`, [usuarioOficina.idUsuario, usuarioOficina.idOficina, idUsuarioOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('El usuario oficina no existe');
         }
-        return getById(idUsuarioOficina);
+        return await getById(idUsuarioOficina);
     } catch (error) {
         console.error("Error al actualizar el usuario en la base de datos:", error.message);
         throw new Error('No se pudo actualizar el usuario en la base de datos');
@@ -57,19 +50,12 @@ export const update = async (idUsuarioOficina, usuarioOficina) => {
 };
 
 export const destroy = async (idUsuarioOficina) => {
-    try {
-        const [usuarioOficinaExistente] = await pool.query(`SELECT uo.idUsuarioOficina, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.idUsuarioOficina = ?`, [idUsuarioOficina]);
-        if (usuarioOficinaExistente.length === 0) {
-            throw new Error('El usuario oficina no existe');
-        }
-        if (usuarioOficinaExistente[0].activo === 0) {
-            throw new Error('El usuario oficina está inactivo y no puede ser eliminado');
-        }
+    try {        
         const consulta = await pool.query(`UPDATE usuariosoficinas SET activo = 0 WHERE idUsuarioOficina =?`, [idUsuarioOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('No se pudo eliminar el estado del usuario oficina');
         }
-        return usuarioOficinaExistente;
+        return true;
     } catch (error) {
         console.error("Error al eliminar el usuario", error.message);
         throw new Error('No se pudo eliminar el usuario en la base de datos');

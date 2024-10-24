@@ -37,7 +37,7 @@ export const create = async (req, res) => {
             idOficina: parseInt(idOficina)
         }
         const resultado = await usuariosOficinasServices.create(usuarioOficinaNuevo);
-        res.status(201).json({ estado: 'OK', mensaje:"El usuario oficina fue creado exitosamente",dato: resultado });
+        res.status(201).json({ estado: 'OK', mensaje: "El usuario oficina fue creado exitosamente", dato: resultado });
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });
@@ -59,7 +59,7 @@ export const update = async (req, res) => {
             idOficina: parseInt(idOficina)
         }
         const resultado = await usuariosOficinasServices.update(idUsuarioOficina, usuarioOficinaActualizado);
-        res.status(200).json({ estado: 'OK',mensaje:"El usuario oficina fue actualizado exitosamente",dato: resultado });
+        res.status(200).json({ estado: 'OK', mensaje: "El usuario oficina fue actualizado exitosamente", dato: resultado });
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });
@@ -72,8 +72,8 @@ export const destroy = async (req, res) => {
         if (!idUsuarioOficina) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID del usuario oficina que desea eliminar" });
         }
-        const usuariosOficinaEliminado = await usuariosOficinasServices.destroy(idUsuarioOficina);
-        res.status(200).json({ estado: 'OK', mensaje: 'El usuario oficina fue eliminado exitosamente', dato: usuariosOficinaEliminado });
+        await usuariosOficinasServices.destroy(idUsuarioOficina);
+        res.status(200).json({ estado: 'OK', mensaje: 'El usuario oficina fue eliminado exitosamente' });
     }
     catch (error) {
         console.error("Error en el servidor:", error);

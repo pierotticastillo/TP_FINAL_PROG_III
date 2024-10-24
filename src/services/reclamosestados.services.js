@@ -26,22 +26,24 @@ export const create = async (descripcion) => {
         return createdReclamoTipo;
     } catch (error) {
         console.error("Error al crear el reclamo en la base de datos:", error.message);
-        throw new Error ('No se pudo obtener el reclamo estado en la base de datos');
+        throw new Error('No se pudo obtener el reclamo estado en la base de datos');
     }
 };
 
 export const update = async (idReclamoEstado, descripcion) => {
     try {
+        await getById(idReclamoEstado);
         const updatedReclamoEstado = await reclamosEstadosDataBase.update(idReclamoEstado, descripcion);
         return updatedReclamoEstado;
     } catch (error) {
         console.error("Error al actualizar el reclamo en la base de datos:", error.message);
-        throw new Error ('No se pudo actualizar el reclamo estado en la base de datos');
+        throw new Error('No se pudo actualizar el reclamo estado en la base de datos');
     }
 };
 
 export const destroy = async (idReclamoEstado) => {
     try {
+        await getById(idReclamoEstado);
         const destroyedReclamoEstado = await reclamosEstadosDataBase.destroy(idReclamoEstado);
         return destroyedReclamoEstado;
     } catch (error) {

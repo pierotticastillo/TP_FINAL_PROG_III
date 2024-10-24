@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Trae todos los reclamos de la oficina que tiene competencia el empleado
 router.get("/", empleadoController.esEmpleado, reclamosController.getAllByEmployee);
+
 // Trae todos los reclamos creados por un usuario tipo cliente
 router.get("/misreclamos", clienteController.esCliente, reclamosController.getAllByUser);
 
@@ -14,8 +15,8 @@ router.get("/:idReclamo", clienteController.esCliente, reclamosController.getByI
 
 router.post("/", clienteController.esCliente, reclamosController.create);
 
-router.patch("/cancelarreclamo", clienteController.esCliente, reclamosController.updateUser);
+router.patch("/cancelacionreclamo", clienteController.esCliente, reclamosController.updateUser);
 
-router.patch("/actualizarreclamo", empleadoController.esEmpleado, reclamosController.updateEmployee);
+router.patch("/actualizacionreclamo", empleadoController.esEmpleado, reclamosController.updateEmployee);
 
 export default router;

@@ -62,8 +62,8 @@ export const destroy = async (req, res) => {
         if (!idReclamoEstado) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del reclamo estado que desea eliminar" });
         }
-        const reclamoEstadoEliminado = await reclamosEstadoServices.destroy(idReclamoEstado);
-        res.status(200).json({ estado: "OK", mensaje: "El reclamo estado fue eliminado exitosamente", dato: reclamoEstadoEliminado });
+        await reclamosEstadoServices.destroy(idReclamoEstado);
+        res.status(200).json({ estado: "OK", mensaje: "El reclamo estado fue eliminado exitosamente"});
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });

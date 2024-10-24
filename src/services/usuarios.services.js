@@ -42,6 +42,7 @@ export const createByCliente = async (usuario) => {
 
 export const update = async (idUsuario, usuario) => {
     try {
+        await getById(idUsuario);
         const updatedUsuario = await usuariosDataBase.update(idUsuario, usuario);
         return updatedUsuario;
     } catch (error) {
@@ -52,6 +53,7 @@ export const update = async (idUsuario, usuario) => {
 
 export const destroy = async (idUsuario) => {
     try {
+        await getById(idUsuario);
         const destroyedUsuario = await usuariosDataBase.destroy(idUsuario);
         return destroyedUsuario;
     } catch (error) {

@@ -70,8 +70,8 @@ export const destroy = async (req, res) => {
         if (!idOficina) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID de la oficina que desea eliminar" });
         }
-        const oficinaEliminada = await oficinasServices.destroy(idOficina);
-        res.status(200).json({ estado: 'OK', mensaje: "Oficina eliminada exitosamente", dato: oficinaEliminada });
+        await oficinasServices.destroy(idOficina);
+        res.status(200).json({ estado: 'OK', mensaje: "Oficina eliminada exitosamente"});
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });

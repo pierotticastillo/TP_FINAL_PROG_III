@@ -2,7 +2,7 @@ import pool from '../dataBase/dataBase.js';
 
 export const getAll = async () => {
     try {
-        const [consulta] = await pool.query(`SELECT o.idOficina, o.nombre, rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt. idReclamoTipo WHERE o.activo = 1;`);
+        const [consulta] = await pool.query(`SELECT o.idOficina, o.nombre, o.idReclamoTipo,rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt. idReclamoTipo WHERE o.activo = 1;`);
         return consulta;
     } catch (error) {
         console.error("Error al obtener todas las oficinas en la base de datos:", error.message);
@@ -13,7 +13,7 @@ export const getAll = async () => {
 export const getById = async (idOficina) => {
     try {
         const [oficinaExistente] = await pool.query(`
-            SELECT o.idOficina, o.nombre, rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo WHERE o.activo = 1 AND o.idOficina = ?`, [idOficina]);
+            SELECT o.idOficina, o.nombre, o.idReclamoTipo,rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo WHERE o.activo = 1 AND o.idOficina = ?`, [idOficina]);
         if (oficinaExistente.length === 0) {
             throw new Error('La oficina no existe o está inactiva');
         }
@@ -27,7 +27,7 @@ export const getById = async (idOficina) => {
 export const create = async (oficina) => {
     try {
         const [consulta] = await pool.query(`INSERT INTO oficinas (nombre, idReclamoTipo) VALUES (?,?);`, [oficina.nombre, oficina.idReclamoTipo]);
-        return getById(consulta.insertId);
+        return await getById(consulta.insertId);
     } catch (error) {
         console.error("Error al crear la oficina en la base de datos:", error.message);
         throw new Error('No se pudo crear la oficina');
@@ -35,17 +35,12 @@ export const create = async (oficina) => {
 };
 
 export const update = async (idOficina, oficina) => {
-    try {
-        const [oficinaExistente] = await pool.query(`
-            SELECT o.idOficina, o.nombre, rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo WHERE o.activo = 1 AND o.idOficina = ?`, [idOficina]);
-        if (oficinaExistente.length === 0) {
-            throw new Error('La oficina no existe o está inactiva');
-        }
+    try {        
         const [consulta] = await pool.query(`UPDATE oficinas SET nombre =?, idReclamoTipo =? WHERE idOficina =?;`, [oficina.nombre, oficina.idReclamoTipo, idOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('La oficina no se pudo actualizar');
         }
-        return getById(idOficina);
+        return await getById(idOficina);
     } catch (error) {
         console.error("Error al actualizar la oficina en la base de datos:", error.message);
         throw new Error('No se pudo actualizar la oficina');
@@ -53,17 +48,12 @@ export const update = async (idOficina, oficina) => {
 };
 
 export const destroy = async (idOficina) => {
-    try {
-        const [oficinaExistente] = await pool.query(`
-        SELECT o.idOficina, o.nombre, rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo WHERE o.activo = 1 AND o.idOficina = ?`, [idOficina]);
-        if (oficinaExistente.length === 0) {
-            throw new Error('La oficina no existe o está inactiva');
-        }
+    try {        
         const [consulta] = await pool.query(`UPDATE oficinas SET activo = 0 WHERE idOficina = ?;`,[idOficina]);
         if (consulta.affectedRows === 0) {
-            throw new Error('No se pudieron inactivar las oficinas');
+            throw new Error('No se pudo eliminar la oficina');
         }
-        return oficinaExistente;
+        return true;
     } catch (error) {
         console.error("Error al inactivar oficinas en la base de datos:", error.message);
         throw new Error('No se pudieron inactivar las oficinas')
