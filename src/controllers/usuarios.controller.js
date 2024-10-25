@@ -100,12 +100,12 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
     try {
-        const idUsuario = req.params.idUsuario;
+        const { idUsuario } = req.body;
         if (!idUsuario) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID del usuario que desea eliminar" });
         }
-        await usuariosServices.destroy(idUsuario);
-        res.status(200).json({ estado: "OK", mensaje: 'El usuario fue eliminado exitosamente'});
+        await usuariosServices.destroy(parseInt(idUsuario));
+        res.status(200).json({ estado: "OK", mensaje: 'El usuario fue eliminado exitosamente' });
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });

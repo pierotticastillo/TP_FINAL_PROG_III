@@ -46,8 +46,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const idUsuarioOficina = req.params.idUsuarioOficina;
-        const { idUsuario, idOficina } = req.body;
+        const { idUsuarioOficina, idUsuario, idOficina } = req.body;
         if (!idUsuarioOficina) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del usuario oficina que desea actualizar" });
         }
@@ -55,10 +54,11 @@ export const update = async (req, res) => {
             return res.status(400).json({ estado: "Falla", mensaje: "Faltan los IDs de usuario y oficina" });
         }
         const usuarioOficinaActualizado = {
+            idUsuarioOficina: parseInt(idUsuarioOficina),
             idUsuario: parseInt(idUsuario),
             idOficina: parseInt(idOficina)
         }
-        const resultado = await usuariosOficinasServices.update(idUsuarioOficina, usuarioOficinaActualizado);
+        const resultado = await usuariosOficinasServices.update(usuarioOficinaActualizado);
         res.status(200).json({ estado: 'OK', mensaje: "El usuario oficina fue actualizado exitosamente", dato: resultado });
     } catch (error) {
         console.error("Error en el servidor:", error);
@@ -68,11 +68,11 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
     try {
-        const idUsuarioOficina = req.params.idUsuarioOficina;
+        const { idUsuarioOficina } = req.body;
         if (!idUsuarioOficina) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID del usuario oficina que desea eliminar" });
         }
-        await usuariosOficinasServices.destroy(idUsuarioOficina);
+        await usuariosOficinasServices.destroy(parseInt(idUsuarioOficina));
         res.status(200).json({ estado: 'OK', mensaje: 'El usuario oficina fue eliminado exitosamente' });
     }
     catch (error) {

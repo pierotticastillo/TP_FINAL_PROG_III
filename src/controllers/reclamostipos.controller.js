@@ -41,15 +41,14 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const idReclamoTipo = req.params.idReclamoTipo;
-        const { descripcion } = req.body;
+        const { idReclamoTipo, descripcion } = req.body;
         if (!idReclamoTipo) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del reclamo tipo" });
         }
         if (!descripcion) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta la descripcion para actualizar el reclamo tipo" });
         }
-        const reclamoTipoActualizado = await reclamosServices.update(idReclamoTipo, descripcion);
+        const reclamoTipoActualizado = await reclamosServices.update(parseInt(idReclamoTipo), descripcion);
         res.status(200).json({ estado: 'OK', dato: reclamoTipoActualizado });
     }
     catch (error) {
@@ -60,11 +59,11 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
     try {
-        const idReclamoTipo = req.params.idReclamoTipo;
+        const { idReclamoTipo } = req.body;
         if (!idReclamoTipo) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del reclamo tipo" });
         }
-        await reclamosServices.destroy(idReclamoTipo);
+        await reclamosServices.destroy(parseInt(idReclamoTipo));
         res.status(200).json({ estado: 'OK', mensaje: "Reclamo tipo eliminado correctamente" });
     } catch (error) {
         console.error("Error en el servidor:", error);

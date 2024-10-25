@@ -39,9 +39,9 @@ export const create = async (oficina) => {
     }
 };
 
-export const update = async (idOficina, oficina) => {
+export const update = async (oficina) => {
     try {
-        await getById(idOficina);
+        await getById(oficina.idOficina);
         await reclamoTipoService.getById(oficina.idReclamoTipo);
         const allOficinas = await getAll();
         const oficinaConTipoReclamo = allOficinas.find(
@@ -50,7 +50,7 @@ export const update = async (idOficina, oficina) => {
         if (oficinaConTipoReclamo) {
             throw new Error("Ya existe una oficina con el tipo de reclamo");
         }        
-        const updatedOficina = await oficinaDataBase.update(idOficina, oficina);
+        const updatedOficina = await oficinaDataBase.update(oficina);
         return updatedOficina;
     } catch (error) {
         console.error("Error al actualizar la oficina en la base de datos:", error.message);

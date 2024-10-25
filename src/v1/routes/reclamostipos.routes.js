@@ -9,8 +9,8 @@ router.get('/:idReclamoTipo', reclamostiposcontroller.getById);
 
 router.post('/', reclamostiposcontroller.create);
 
-router.patch('/:idReclamoTipo', reclamostiposcontroller.update);
+router.patch('/actualizacion', reclamostiposcontroller.update);
 
-router.delete('/:idReclamoTipo', reclamostiposcontroller.destroy);
+router.patch('/eliminacion', reclamostiposcontroller.destroy);
 
 export default router;

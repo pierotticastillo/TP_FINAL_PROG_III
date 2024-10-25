@@ -36,9 +36,9 @@ export const create = async (usuarioOficina) => {
     }
 };
 
-export const update = async (idUsuarioOficina, usuarioOficina) => {
+export const update = async (usuarioOficina) => {
     try {        
-        const [consulta] = await pool.query(`UPDATE usuariosoficinas SET idUsuario = ?, idOficina = ? WHERE idUsuarioOficina = ?`, [usuarioOficina.idUsuario, usuarioOficina.idOficina, idUsuarioOficina]);
+        const [consulta] = await pool.query(`UPDATE usuariosoficinas SET idUsuario = ?, idOficina = ? WHERE idUsuarioOficina = ?`, [usuarioOficina.idUsuario, usuarioOficina.idOficina, usuarioOficina.idUsuarioOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('El usuario oficina no existe');
         }

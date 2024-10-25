@@ -321,12 +321,31 @@
 					"response": []
 				},
 				{
-					"name": "DELETE USUARIOS",
+					"name": "ELIMINACION USUARIOS",
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3Mjk4OTE1MzMsImV4cCI6MTcyOTg5NTEzM30.2bLOccJEVu2o5-BYQVUVgUMvSDZIdm-fddhw8DRgUXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios/?",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/eliminacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -334,13 +353,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"eliminacion"
 							]
 						}
 					},
@@ -441,7 +454,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamos/cancelacionreclamo",
+							"raw": "{{BASE_URL}}/api/v1/reclamos/cancelacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -449,7 +462,7 @@
 								"api",
 								"v1",
 								"reclamos",
-								"cancelacionreclamo"
+								"cancelacion"
 							],
 							"query": [
 								{
@@ -487,7 +500,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamos/actualizacionreclamo",
+							"raw": "{{BASE_URL}}/api/v1/reclamos/actualizacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -495,7 +508,7 @@
 								"api",
 								"v1",
 								"reclamos",
-								"actualizacionreclamo"
+								"actualizacion"
 							]
 						}
 					},
@@ -614,7 +627,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n}",
+							"raw": "{\r\n    \"idOficina\":\"?\",\r\n    \"nombre\":\"?\",\r\n    \"idReclamoTipo\":\"?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -622,26 +635,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/oficinas",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"oficinas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE OFICINAS",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/api/v1/oficinas/?",
+							"raw": "{{BASE_URL}}/api/v1/oficinas/actualizacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -649,13 +643,36 @@
 								"api",
 								"v1",
 								"oficinas",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
+								"actualizacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINACION OFICINAS",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idOficina\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/oficinas/eliminacion",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oficinas",
+								"eliminacion"
 							]
 						}
 					},
@@ -746,7 +763,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"raw": "{\r\n    \"idReclamoEstado\":\"?\",\r\n    \"descripcion\":\"?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -754,7 +771,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamosestados/?",
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados/actualizacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -762,25 +779,28 @@
 								"api",
 								"v1",
 								"reclamosestados",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"actualizacion"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE RECLAMOS ESTADOS",
+					"name": "ELIMINACION RECLAMOS ESTADOS",
 					"request": {
-						"method": "DELETE",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReclamoEstado\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamosestados/?",
+							"raw": "{{BASE_URL}}/api/v1/reclamosestados/eliminacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -788,13 +808,7 @@
 								"api",
 								"v1",
 								"reclamosestados",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"eliminacion"
 							]
 						}
 					},
@@ -885,7 +899,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"descripcion\":\"?\"\r\n}",
+							"raw": "{\r\n    \"idReclamoTipo\":\"?\",\r\n    \"descripcion\":\"?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -893,7 +907,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamostipos/?",
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos/actualizacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -901,25 +915,28 @@
 								"api",
 								"v1",
 								"reclamostipos",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"actualizacion"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE RECLAMOS TIPOS",
+					"name": "ELIMINACION RECLAMOS TIPOS",
 					"request": {
-						"method": "DELETE",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReclamoTipo\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamostipos/?",
+							"raw": "{{BASE_URL}}/api/v1/reclamostipos/eliminacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -927,13 +944,7 @@
 								"api",
 								"v1",
 								"reclamostipos",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"eliminacion"
 							]
 						}
 					},
@@ -1024,7 +1035,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idUsuario\":?,\r\n    \"idOficina\":?\r\n}",
+							"raw": "{\r\n    \"idUsuarioOficina\":\"?\",\r\n    \"idUsuario\":\"?\",\r\n    \"idOficina\":\"?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1032,7 +1043,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/?",
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/actualizacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -1040,25 +1051,28 @@
 								"api",
 								"v1",
 								"usuariosoficinas",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"actualizacion"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE USUARIOS OFICINAS",
+					"name": "ELIMINACION USUARIOS OFICINAS",
 					"request": {
-						"method": "DELETE",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuarioOficina\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/?",
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/eliminacion",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -1066,13 +1080,7 @@
 								"api",
 								"v1",
 								"usuariosoficinas",
-								""
-							],
-							"query": [
-								{
-									"key": null,
-									"value": null
-								}
+								"eliminacion"
 							]
 						}
 					},

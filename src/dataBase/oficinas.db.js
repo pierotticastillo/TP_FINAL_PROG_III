@@ -36,7 +36,7 @@ export const create = async (oficina) => {
 
 export const update = async (idOficina, oficina) => {
     try {        
-        const [consulta] = await pool.query(`UPDATE oficinas SET nombre =?, idReclamoTipo =? WHERE idOficina =?;`, [oficina.nombre, oficina.idReclamoTipo, idOficina]);
+        const [consulta] = await pool.query(`UPDATE oficinas SET nombre =?, idReclamoTipo =? WHERE idOficina =?;`, [oficina.nombre, oficina.idReclamoTipo, oficina.idOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('La oficina no se pudo actualizar');
         }

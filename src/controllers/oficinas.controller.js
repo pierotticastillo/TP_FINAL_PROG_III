@@ -44,8 +44,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const idOficina = req.params.idOficina;
-        const { nombre, idReclamoTipo } = req.body;
+        const { idOficina, nombre, idReclamoTipo } = req.body;
         if (!idOficina) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID de la oficina que desea actualizar" });
         }
@@ -53,10 +52,11 @@ export const update = async (req, res) => {
             return res.status(400).json({ estado: "Falla", mensaje: "Faltan los datos de la oficina para actualizarla" });
         }
         const oficina = {
+            idOficina: parseInt(idOficina),
             nombre,
             idReclamoTipo: parseInt(idReclamoTipo)
         }
-        const oficinaActualizada = await oficinasServices.update(idOficina, oficina);
+        const oficinaActualizada = await oficinasServices.update(oficina);
         res.status(200).json({ estado: 'OK', dato: oficinaActualizada });
     } catch (error) {
         console.error("Error en el servidor:", error);
@@ -66,12 +66,12 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
     try {
-        const idOficina = req.params.idOficina;
+        const { idOficina } = req.body;
         if (!idOficina) {
             return res.status(404).json({ estado: "Falla", mensaje: "Falta el ID de la oficina que desea eliminar" });
         }
-        await oficinasServices.destroy(idOficina);
-        res.status(200).json({ estado: 'OK', mensaje: "Oficina eliminada exitosamente"});
+        await oficinasServices.destroy(parseInt(idOficina));
+        res.status(200).json({ estado: 'OK', mensaje: "Oficina eliminada exitosamente" });
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });

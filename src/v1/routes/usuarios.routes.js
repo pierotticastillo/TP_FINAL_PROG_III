@@ -72,6 +72,6 @@ router.patch('modificacionempleado', [authenticate, empleadoMiddleware.esEmplead
 router.patch('modificacioncliente', [authenticate, clienteMiddleware.esCliente], usuariosController.update);
 
 // Eliminado lógico de un usuario, es decir, va a ser cambiado a 0 el campo activo del registro del usuario
-router.delete('/:idUsuario', [authenticate, administradorMiddleware.esAdministrador], usuariosController.destroy);
+router.patch('/eliminacion', [authenticate, administradorMiddleware.esAdministrador], usuariosController.destroy);
 
 export default router;

@@ -15,8 +15,8 @@ router.get("/:idReclamo", clienteController.esCliente, reclamosController.getByI
 
 router.post("/", clienteController.esCliente, reclamosController.create);
 
-router.patch("/cancelacionreclamo", clienteController.esCliente, reclamosController.updateUser);
+router.patch("/cancelacion", clienteController.esCliente, reclamosController.updateUser);
 
-router.patch("/actualizacionreclamo", empleadoController.esEmpleado, reclamosController.updateEmployee);
+router.patch("/actualizacion", empleadoController.esEmpleado, reclamosController.updateEmployee);
 
 export default router;

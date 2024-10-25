@@ -45,9 +45,9 @@ export const create = async (usuarioOficina) => {
     }
 };
 
-export const update = async (idUsuarioOficina, usuarioOficina) => {
+export const update = async (usuarioOficina) => {
     try {
-        await getById(idUsuarioOficina);
+        await getById(usuarioOficina.idUsuarioOficina);
         const usuario = await usuariosServices.getById(usuarioOficina.idUsuario);
         // Comprueba si el usuario tiene el rol de empleado
         if (usuario.idUsuarioTipo !== 'Empleado') { // Ajusta la verificación según cómo se define el rol de empleado
@@ -62,7 +62,7 @@ export const update = async (idUsuarioOficina, usuarioOficina) => {
         if (existeEmpleadoOficina) {
             throw new Error('El empleado ya pertenece a esta oficina');
         }
-        const updatedUsuarioOficina = await usuariosOficinasDataBase.update(idUsuarioOficina, usuarioOficina);
+        const updatedUsuarioOficina = await usuariosOficinasDataBase.update(usuarioOficina);
         return updatedUsuarioOficina;
     } catch (error) {
         console.error("Error al actualizar el usuario en la base de datos:", error.message);
