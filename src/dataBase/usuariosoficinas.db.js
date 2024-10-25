@@ -42,7 +42,7 @@ export const update = async (usuarioOficina) => {
         if (consulta.affectedRows === 0) {
             throw new Error('El usuario oficina no existe');
         }
-        return await getById(idUsuarioOficina);
+        return await getById(usuarioOficina.idUsuarioOficina);
     } catch (error) {
         console.error("Error al actualizar el usuario en la base de datos:", error.message);
         throw new Error('No se pudo actualizar el usuario en la base de datos');

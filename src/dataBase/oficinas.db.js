@@ -34,13 +34,13 @@ export const create = async (oficina) => {
     }
 };
 
-export const update = async (idOficina, oficina) => {
+export const update = async (oficina) => {
     try {        
         const [consulta] = await pool.query(`UPDATE oficinas SET nombre =?, idReclamoTipo =? WHERE idOficina =?;`, [oficina.nombre, oficina.idReclamoTipo, oficina.idOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('La oficina no se pudo actualizar');
         }
-        return await getById(idOficina);
+        return await getById(oficina.idOficina);
     } catch (error) {
         console.error("Error al actualizar la oficina en la base de datos:", error.message);
         throw new Error('No se pudo actualizar la oficina');
