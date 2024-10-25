@@ -9,8 +9,8 @@ router.get('/:idOficina', oficinasController.getById);
 
 router.post('/', oficinasController.create);
 
-router.patch('actualizacion', oficinasController.update);
+router.patch('/actualizacion', oficinasController.update);
 
-router.patch('eliminacion', oficinasController.destroy);
+router.patch('/eliminacion', oficinasController.destroy);
 
 export default router;

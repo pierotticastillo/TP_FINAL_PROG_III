@@ -45,11 +45,12 @@ export const update = async (oficina) => {
         await reclamoTipoService.getById(oficina.idReclamoTipo);
         const allOficinas = await getAll();
         const oficinaConTipoReclamo = allOficinas.find(
-            (o) => o.idReclamoTipo === oficina.idReclamoTipo
-        );        
+            (o) => o.idReclamoTipo === oficina.idReclamoTipo && o.idOficina !== oficina.idOficina
+        );
+        
         if (oficinaConTipoReclamo) {
             throw new Error("Ya existe una oficina con el tipo de reclamo");
-        }        
+        }
         const updatedOficina = await oficinaDataBase.update(oficina);
         return updatedOficina;
     } catch (error) {
