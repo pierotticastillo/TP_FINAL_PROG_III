@@ -47,7 +47,11 @@ export const create = async (reclamo) => {
 
 export const updateUser = async (idReclamo, idUsuarioCreador) => {
     try {
-        await getById(idReclamo);
+        const reclamoActual = await getById(idReclamo);
+        console.log(reclamoActual);
+        if(reclamoActual[0].estadoReclamo === "Cancelado"){
+            throw new Error("El reclamo ya fue cancelado");
+        }
         const updatedReclamo = await reclamosDataBase.updateUser(idReclamo, idUsuarioCreador);
         const usuario = await usuariosService.getById(updatedReclamo[0].idUsuarioCreador)
         console.log(usuario);
