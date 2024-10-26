@@ -88,22 +88,11 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
 
 
 export const updateEmployee = async (idReclamo, estado, idUsuario) => {
-    try {
-        const [tipoReclamo] = await pool.query(
-            `SELECT * FROM usuariosOficinas AS uo
-            INNER JOIN oficinas AS o ON o.idOficina = uo.idOficina
-            INNER JOIN reclamosTipo AS rt ON rt.idReclamoTipo = o.idReclamoTipo
-            WHERE uo.idUsuario = ? AND rt.idReclamoTipo = (SELECT idReclamoTipo FROM reclamos WHERE idReclamo = ?)`,
-            [idUsuario, idReclamo]
-        );
-
-        if (tipoReclamo.length === 0) {
-            throw new Error("El empleado no pertenece a la oficina con el tipo de reclamo asignado.");
-        }
+    try {        
         let query;
         let params;
         if (estado === 2) {
-            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 3;`;
+            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 3 AND idReclamoEstado != 4;`;
             params = [estado, idReclamo];
         }
         else if (estado === 4) {
