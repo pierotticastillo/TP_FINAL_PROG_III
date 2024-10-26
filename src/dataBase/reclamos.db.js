@@ -92,11 +92,11 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
         let query;
         let params;
         if (estado === 2) {
-            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 3 AND idReclamoEstado != 4;`;
+            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 4;`;
             params = [estado, idReclamo];
         }
         else if (estado === 4) {
-            query = `UPDATE reclamos SET idReclamoEstado = ?, fechaFinalizado = NOW(), idUsuarioFinalizador = ? WHERE idReclamo = ? AND idReclamoEstado != 3;`;
+            query = `UPDATE reclamos SET idReclamoEstado = ?, fechaFinalizado = NOW(), idUsuarioFinalizador = ? WHERE idReclamo = ? AND idReclamoEstado = 2;`;
             params = [estado, idUsuario, idReclamo];
         }
         const [result] = await pool.query(query, params);

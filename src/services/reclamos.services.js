@@ -49,7 +49,7 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
     try {
         const reclamoActual = await getById(idReclamo);
         console.log(reclamoActual);
-        if(reclamoActual[0].estadoReclamo === "Cancelado"){
+        if (reclamoActual[0].estadoReclamo === "Cancelado") {
             throw new Error("El reclamo ya fue cancelado");
         }
         const updatedReclamo = await reclamosDataBase.updateUser(idReclamo, idUsuarioCreador);
@@ -72,7 +72,11 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
 
 export const updateEmployee = async (idReclamo, estado, idUsuario) => {
     try {
-        await getById(idReclamo);
+        const reclamoActual = await getById(idReclamo);
+        console.log(reclamoActual);
+        if (reclamoActual[0].estadoReclamo === "Cancelado") {
+            throw new Error("El reclamo ya fue cancelado");
+        }
         const reclamosPertenecientes = await getAllByEmployee(idUsuario);
         // Verificar si el reclamo actual pertenece al usuario
         const reclamoDelEmpleado = reclamosPertenecientes.find(
@@ -91,7 +95,7 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
             estado: updatedReclamo[0].estadoReclamo
         }
         console.log(datosCorreo);
-        await correoService.enviarCorreo(datosCorreo)        
+        await correoService.enviarCorreo(datosCorreo)
         return updatedReclamo;
     } catch (error) {
         console.error("Error al actualizar el reclamo en la base de datos:", error);
