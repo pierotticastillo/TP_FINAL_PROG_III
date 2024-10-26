@@ -86,6 +86,10 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
             throw new Error("El reclamo no pertenece al empleado");
         }
         const updatedReclamo = await reclamosDataBase.updateEmployee(idReclamo, estado, idUsuario);
+        if (updatedReclamo.estadorReclamo === reclamoActual.estadoReclamo) {
+            console.error("No se encontró el reclamo o no se pudo actualizar.");
+            throw new Error("No se pudo actualizar el reclamo en la base de datos.");
+        }
         const usuario = await usuariosService.getById(updatedReclamo[0].idUsuarioCreador)
         console.log(usuario);
         const datosCorreo = {
