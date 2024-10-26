@@ -21,6 +21,9 @@ export const getAll = async (parameters) => {
         consulta += ` ORDER BY ${parameters.order} ${parameters.asc} LIMIT ? OFFSET ?`;
         values.push(parameters.limit, parameters.offset);
         const [resultado] = await pool.query(consulta, values);
+        if (resultado.length === 0) {
+            throw new Error("Usuarios no encontrados");
+        }
         return resultado;
     } catch (error) {
         console.error("Error al obtener todos los usuarios en la base de datos:", error.message);

@@ -8,7 +8,7 @@ export const getAllByEmployee = async (idUsuario) => {
         INNER JOIN reclamostipo AS rt ON rt.idReclamoTipo = o.idReclamoTipo
         INNER JOIN reclamos AS r ON r.idReclamoTipo = rt.idReclamoTipo
         WHERE uo.idUsuario = ?`, [idUsuario])
-        if (!consulta.length === 0) {
+        if (consulta.length === 0) {
             throw new Error('El usuario no posee reclamos');
         }
         return consulta;
@@ -29,7 +29,7 @@ export const getAllByUser = async (idUsuario) => {
         INNER JOIN usuarios uC ON r.idUsuarioCreador = uC.idUsuario 
         LEFT JOIN usuarios uF ON r.idUsuarioFinalizador = uF.idUsuario 
         WHERE r.idUsuarioCreador =?;`, [idUsuario]);
-        if (!consulta.length === 0) {
+        if (consulta.length === 0) {
             throw new Error('El usuario no posee reclamos');
         }
         return consulta;
@@ -50,7 +50,7 @@ export const getById = async (idReclamo) => {
         INNER JOIN usuarios uC ON r.idUsuarioCreador = uC.idUsuario 
         LEFT JOIN usuarios uF ON r.idUsuarioFinalizador = uF.idUsuario 
         WHERE idReclamo = ?;`, [idReclamo]);
-        if (!reclamoExistente.length === 0) {
+        if (reclamoExistente.length === 0) {
             throw new Error('El reclamo no existe');
         }
         return reclamoExistente;

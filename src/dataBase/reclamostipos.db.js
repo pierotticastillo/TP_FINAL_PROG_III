@@ -3,6 +3,9 @@ import pool from "../dataBase/dataBase.js";
 export const getAll = async () => {
     try {
         const [consulta] = await pool.query(`SELECT * FROM reclamostipo WHERE activo = 1;`);
+        if (consulta.length === 0) {
+            throw new Error('No hay tipos de reclamos activos');
+        }
         return consulta;
     } catch (error) {
         console.error("Error al obtener todos los tipos de reclamos en la base de datos:", error.message);

@@ -3,6 +3,9 @@ import pool from '../dataBase/dataBase.js';
 export const getAll = async () => {
     try {
         const [consulta] = await pool.query(`SELECT o.idOficina, o.nombre, o.idReclamoTipo,rt.descripcion AS tipoReclamo, o.activo FROM oficinas o INNER JOIN reclamosTipo rt ON o.idReclamoTipo = rt. idReclamoTipo WHERE o.activo = 1;`);
+        if (consulta.length === 0) {
+            throw new Error('Las oficina no fueron encontradas');
+        }
         return consulta;
     } catch (error) {
         console.error("Error al obtener todas las oficinas en la base de datos:", error.message);
