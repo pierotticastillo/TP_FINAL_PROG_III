@@ -69,7 +69,7 @@ export const update = async (usuarioOficina) => {
 
 export const destroy = async (idUsuarioOficina) => {
     try {        
-        const consulta = await pool.query(`UPDATE usuariosoficinas SET activo = 0 WHERE idUsuarioOficina =?`, [idUsuarioOficina]);
+        const [consulta] = await pool.query(`UPDATE usuariosoficinas SET activo = 0 WHERE idUsuarioOficina =? AND activo = 1`, [idUsuarioOficina]);
         if (consulta.affectedRows === 0) {
             throw new Error('No se pudo eliminar el estado del usuario oficina');
         }

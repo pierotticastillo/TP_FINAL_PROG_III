@@ -84,6 +84,7 @@ export const update = async (usuarioOficina) => {
 
 export const destroy = async (idUsuarioOficina) => {
     try {
+        await getById(idUsuarioOficina);
         const deletedUsuarioOficina = await usuariosOficinasDataBase.destroy(idUsuarioOficina);
         return deletedUsuarioOficina;
     } catch (error) {
