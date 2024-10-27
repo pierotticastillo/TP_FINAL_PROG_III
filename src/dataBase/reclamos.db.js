@@ -2,11 +2,12 @@ import pool from '../dataBase/dataBase.js';
 
 export const getAllByEmployee = async (idUsuario) => {
     try {
-        const [consulta] = await pool.query(`SELECT u.nombre, o.idOficina, o.nombre, r.idReclamo, r.asunto, r.fechaCreado, rt.descripcion FROM usuariosoficinas AS uo
+        const [consulta] = await pool.query(`SELECT u.nombre, o.idOficina, o.nombre, r.idReclamo, r.asunto, r.fechaCreado, rt.descripcion, re.descripcion AS estadoReclamo FROM usuariosoficinas AS uo
         INNER JOIN usuarios AS u ON u.idUsuario = uo.idUsuario
         INNER JOIN oficinas AS o ON o.idOficina = uo.idOficina
         INNER JOIN reclamostipo AS rt ON rt.idReclamoTipo = o.idReclamoTipo
         INNER JOIN reclamos AS r ON r.idReclamoTipo = rt.idReclamoTipo
+        INNER JOIN reclamosEstado re ON r.idReclamoEstado = re.idReclamoEstado
         WHERE uo.idUsuario = ?`, [idUsuario])
         if (consulta.length === 0) {
             throw new Error('El usuario no posee reclamos');
