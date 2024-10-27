@@ -28,7 +28,7 @@ export const getAllByUser = async (req, res) => {
     }
 }
 
-export const getById = async (req, res) => {
+export const getByIdUser = async (req, res) => {
     try {
         const idUsuario = req.user.idUsuario;
         const idReclamo = req.params.idReclamo;
