@@ -67,9 +67,9 @@ router.post('/creacioncliente',
     [check('correoElectronico', 'Revisar el formato del correo electrónico!').isEmail(), validarCampos], usuariosController.createByCliente);
 
 // Modificar usuario
-router.patch('modificacionempleado', [authenticate, empleadoMiddleware.esEmpleado], usuariosController.update);
+router.patch('/modificacionempleado', [authenticate, empleadoMiddleware.esEmpleado], usuariosController.update);
 
-router.patch('modificacioncliente', [authenticate, clienteMiddleware.esCliente], usuariosController.update);
+router.patch('/modificacioncliente', [authenticate, clienteMiddleware.esCliente], usuariosController.update);
 
 // Eliminado lógico de un usuario, es decir, va a ser cambiado a 0 el campo activo del registro del usuario
 router.patch('/eliminacion', [authenticate, administradorMiddleware.esAdministrador], usuariosController.destroy);
