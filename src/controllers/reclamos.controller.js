@@ -30,11 +30,12 @@ export const getAllByUser = async (req, res) => {
 
 export const getById = async (req, res) => {
     try {
+        const idUsuario = req.user.idUsuario;
         const idReclamo = req.params.idReclamo;
         if (!idReclamo) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del reclamo" });
         }
-        const resultado = await reclamosServices.getById(idReclamo);
+        const resultado = await reclamosServices.getByIdByUser(idReclamo, idUsuario);
         res.status(200).json({ estado: 'OK', dato: resultado });
     } catch (error) {
         console.error("Error en el servidor:", error);

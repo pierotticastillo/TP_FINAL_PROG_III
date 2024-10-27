@@ -11,7 +11,7 @@ router.get("/", empleadoController.esEmpleado, reclamosController.getAllByEmploy
 // Trae todos los reclamos creados por un usuario tipo cliente
 router.get("/misreclamos", clienteController.esCliente, reclamosController.getAllByUser);
 
-router.get("/:idReclamo", clienteController.esCliente, reclamosController.getById);
+router.get("/misreclamos/:idReclamo", clienteController.esCliente, reclamosController.getById);
 
 router.post("/", clienteController.esCliente, reclamosController.create);
 

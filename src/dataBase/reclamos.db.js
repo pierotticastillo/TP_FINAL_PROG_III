@@ -77,8 +77,8 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
         const updatedReclamo = await pool.query(
             `UPDATE reclamos SET fechaCancelado = NOW(), idReclamoEstado = 3 WHERE idReclamo = ? AND idReclamoEstado = 1 AND idUsuarioCreador = ?;`, [idReclamo, idUsuarioCreador]
         );
-        if (updatedReclamo.affectedRows === 0) {
-            throw new Error("No se puede cancelar el reclamo porque no está en estado 'creado'");
+        if (updatedReclamo[0].affectedRows === 0) {
+            throw new Error("No se puede cancelar el reclamo porque no está en estado 'creado' o no pertenece al cliente");
         }
         return await getById(idReclamo);
     } catch (error) {
@@ -93,16 +93,16 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
         let query;
         let params;
         if (estado === 2) {
-            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 4;`;
+            query = `UPDATE reclamos SET idReclamoEstado = ? WHERE idReclamo = ? AND idReclamoEstado != 4 AND idReclamoEstado != 2;`;
             params = [estado, idReclamo];
         }
         else if (estado === 4) {
-            query = `UPDATE reclamos SET idReclamoEstado = ?, fechaFinalizado = NOW(), idUsuarioFinalizador = ? WHERE idReclamo = ? AND idReclamoEstado = 2;`;
+            query = `UPDATE reclamos SET idReclamoEstado = ?, fechaFinalizado = NOW(), idUsuarioFinalizador = ? WHERE idReclamo = ? AND idReclamoEstado = 2 AND idReclamoEstado != 4;`;
             params = [estado, idUsuario, idReclamo];
         }
-        const [result] = await pool.query(query, params);
+        const result = await pool.query(query, params);
         // Verificación de si se actualizó el reclamo
-        if (result.affectedRows === 0) {
+        if (result[0].affectedRows === 0) {
             throw new Error("No se encontró el reclamo o no se pudo actualizar.");
         }
         return await getById(idReclamo);

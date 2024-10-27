@@ -12,10 +12,20 @@
 				{
 					"name": "GET ALL USUARIOS 1",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAwNjQ2NzIsImV4cCI6MTczMDA2ODI3Mn0.fIFIr8P2DGL4YDkqDVEU4a5WaIiNRDfnKkVMm-lsAG0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios",
+							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=20&offset=3",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -23,6 +33,16 @@
 								"api",
 								"v1",
 								"usuarios"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -404,12 +424,12 @@
 					"response": []
 				},
 				{
-					"name": "GET BY ID RECLAMOS",
+					"name": "GET BY ID MI RECLAMO",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/reclamos/?",
+							"raw": "{{BASE_URL}}/api/v1/reclamos/misreclamos/?",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -417,11 +437,12 @@
 								"api",
 								"v1",
 								"reclamos",
+								"misreclamos",
 								""
 							],
 							"query": [
 								{
-									"key": null,
+									"key": "",
 									"value": null
 								}
 							]
@@ -483,7 +504,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjE0LCJlbWFpbCI6Im1vbml6QGdtYWlsLmNvbSIsInVzdWFyaW9UaXBvIjoiRW1wbGVhZG8iLCJpYXQiOjE3Mjg0MTg1NDUsImV4cCI6MTcyODQyMjE0NX0._J9fhvkjGlxAUiSOg5XhMlTbOj9dXK6-MEO__YA8Ve0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjMsImVtYWlsIjoidHlybGFuQGNvcnJlby5jb20iLCJ1c3VhcmlvVGlwbyI6IkVtcGxlYWRvIiwiaWF0IjoxNzMwMDU1Nzg2LCJleHAiOjE3MzAwNTkzODZ9.pAWjctBnK270YrW7ziNDFyRL5Oe9FzFzeqNF_e2TskQ",
 									"type": "string"
 								}
 							]
@@ -492,7 +513,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idReclamo\":15,\r\n    \"idReclamoEstado\":4\r\n}",
+							"raw": "{\r\n    \"idReclamo\":56,\r\n    \"idReclamoEstado\":2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -517,11 +538,21 @@
 				{
 					"name": "POST RECLAMOS",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjE3LCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9lbnJpcXVlQGdtYWlsLmNvbSIsInVzdWFyaW9UaXBvIjoiQ2xpZW50ZSIsImlhdCI6MTcyOTk1NDg1OCwiZXhwIjoxNzI5OTU4NDU4fQ.hoynsJHPoBkPGsSqA4u1Xcy5HK4P-NRB_FrC2Onpf_o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"asunto\":\"?\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoTipo\":\"?\"\r\n\r\n}",
+							"raw": "{\r\n    \"asunto\":\"Prueba 20241026\",\r\n    \"descripcion\":\"\",\r\n    \"idReclamoTipo\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -956,19 +987,60 @@
 			"name": "USUARIOS OFICINAS",
 			"item": [
 				{
-					"name": "GET USUARIOS OFICINAS",
+					"name": "GET ALL USUARIOS OFICINAS ASIGNADOS",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAwNTg4NzQsImV4cCI6MTczMDA2MjQ3NH0.FeW_BsyzX2N9OuJldjcFQjz7o3rQLmskIBBQ-yjlM4w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas",
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/empleadosasignados",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"usuariosoficinas"
+								"usuariosoficinas",
+								"empleadosasignados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USUARIOS OFICINAS NO ASIGNADOS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAwNTg4NzQsImV4cCI6MTczMDA2MjQ3NH0.FeW_BsyzX2N9OuJldjcFQjz7o3rQLmskIBBQ-yjlM4w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/usuariosoficinas/empleadosnoasignados",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuariosoficinas",
+								"empleadosnoasignados"
 							]
 						}
 					},
