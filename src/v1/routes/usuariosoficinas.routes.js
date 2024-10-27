@@ -3,7 +3,9 @@ import * as usuariosOficinasController from "../../controllers/usuariosoficinas.
 
 const router = express.Router();
 
-router.get("/", usuariosOficinasController.getAll);
+router.get("/empleadosasignados", usuariosOficinasController.getAllAsigned);
+
+router.get("/empleadosnoasignados", usuariosOficinasController.getAllUnasigned);
 
 router.get("/:idUsuarioOficina", usuariosOficinasController.getById);
 

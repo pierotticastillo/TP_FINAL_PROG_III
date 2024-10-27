@@ -1,8 +1,8 @@
 import pool from '../dataBase/dataBase.js';
 
-export const getAll = async () => {
+export const getAllAsigned = async () => {
     try {
-        const [consulta] = await pool.query(`SELECT uo.idUsuarioOficina, u.idUsuario,u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.idOficina,o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.activo = 1;;`);
+        const [consulta] = await pool.query(`SELECT uo.idUsuarioOficina, u.idUsuario,u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico, o.idOficina,o.nombre AS nombreOficina, uo.activo FROM usuariosOficinas uo INNER JOIN usuarios u ON uo.idUsuario = u.idUsuario INNER JOIN oficinas o ON uo.idOficina = o.idOficina WHERE uo.activo = 1;`);
         if(consulta.length === 0) {
             throw new Error('No hay usuarios oficinas registrados');
         }
@@ -12,6 +12,21 @@ export const getAll = async () => {
         throw new Error('No se pudieron obtener los usuarios');
     }
 };
+
+export const getAllUnasigned = async () => {
+    try {
+        const [consulta] = await pool.query(`SELECT u.idUsuario, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.correoElectronico FROM usuarios u WHERE u.idUsuarioTipo = 2 AND NOT EXISTS (SELECT 1 FROM usuariosOficinas uo WHERE uo.idUsuario = u.idUsuario AND uo.activo = 1);`);
+        if(consulta.length === 0) {
+            throw new Error('No hay usuarios oficinas sin asignar');
+        }
+        return consulta;
+    } catch (error) {
+        console.error("Error al obtener todos los usuarios en la base de datos:", error.message);
+        throw new Error('No se pudieron obtener los usuarios');
+    }
+};
+
+
 
 export const getById = async (idUsuarioOficina) => {
     try {

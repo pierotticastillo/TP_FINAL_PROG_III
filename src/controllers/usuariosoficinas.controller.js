@@ -1,14 +1,23 @@
 import * as usuariosOficinasServices from "../services/usuariosoficinas.services.js";
 
-export const getAll = async (req, res) => {
+export const getAllAsigned = async (req, res) => {
     try {
-        const resultado = await usuariosOficinasServices.getAll();
+        const resultado = await usuariosOficinasServices.getAllAsigned();
         res.status(200).json({ estado: 'OK', dato: resultado });
     } catch (error) {
         console.error("Error en el servidor:", error);
         res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });
     }
+};
 
+export const getAllUnasigned = async (req, res) => {
+    try {
+        const resultado = await usuariosOficinasServices.getAllUnasigned();
+        res.status(200).json({ estado: 'OK', dato: resultado });
+    } catch (error) {
+        console.error("Error en el servidor:", error);
+        res.status(500).json({ estado: "Falla", mensaje: "Error en el servidor", error: error.message });
+    }
 };
 
 export const getById = async (req, res) => {

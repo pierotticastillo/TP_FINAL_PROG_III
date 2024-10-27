@@ -1,15 +1,27 @@
 import * as usuariosOficinasDataBase from "../dataBase/usuariosOficinas.db.js";
 import * as usuariosServices from "../services/usuarios.services.js";
 import * as oficinaServices from "../services/oficinas.services.js";
-export const getAll = async () => {
+
+export const getAllAsigned = async () => {
     try {
-        const allUsuariosOficinas = await usuariosOficinasDataBase.getAll();
+        const allUsuariosOficinas = await usuariosOficinasDataBase.getAllAsigned();
         return allUsuariosOficinas;
     } catch (error) {
         console.error("Error al obtener todos los usuarios en la base de datos:", error.message);
         throw new Error("No se pudo obtener los usuarios en la base de datos");
     }
 };
+
+export const getAllUnasigned = async () => {
+    try {
+        const allUsuariosOficinas = await usuariosOficinasDataBase.getAllUnasigned();
+        return allUsuariosOficinas;
+    } catch (error) {
+        console.error("Error al obtener todos los usuarios en la base de datos:", error.message);
+        throw new Error("No se pudo obtener los usuarios en la base de datos");
+    }
+};
+
 
 export const getById = async (idUsuarioOficina) => {
     try {
