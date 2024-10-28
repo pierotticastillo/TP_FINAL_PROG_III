@@ -10,19 +10,9 @@ export const getEstadistica = async () => {
     }
 };
 
-export const getCSV = async () => {
+export const getFile = async () => {
     try {
-        const allEstadisticas = await estadisticaDataBase.getCSV();
-        return allEstadisticas;
-    } catch (error) {
-        console.error("Error al obtener todas las oficinas en la base de datos:", error.message);
-        throw new Error("No se pudo obtener las oficinas en la base de datos");
-    }
-};
-
-export const getPDF = async () => {
-    try {
-        const allEstadisticas = await estadisticaDataBase.getPDF();
+        const allEstadisticas = await estadisticaDataBase.getFile();
         return allEstadisticas;
     } catch (error) {
         console.error("Error al obtener todas las oficinas en la base de datos:", error.message);
