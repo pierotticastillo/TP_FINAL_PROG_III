@@ -44,7 +44,7 @@ export const create = async (usuarioOficina) => {
         if (!oficina || oficina.length === 0) {
             throw new Error('La oficina no existe o está inactiva');
         }
-        const allUsuariosOficinas = await getAll();
+        const allUsuariosOficinas = await getAllAsigned();
         const existeEmpleadoOficina = allUsuariosOficinas.find((uo) => uo.idUsuario === usuarioOficina.idUsuario && uo.idOficina === usuarioOficina.idOficina);
         if (existeEmpleadoOficina) {
             throw new Error('El empleado ya pertenece a esta oficina');
@@ -69,7 +69,7 @@ export const update = async (usuarioOficina) => {
         if (!oficina || oficina.length === 0) {
             throw new Error('La oficina no existe o está inactiva');
         }
-        const allUsuariosOficinas = await getAll();
+        const allUsuariosOficinas = await getAllAsigned();
         const existeEmpleadoOficina = allUsuariosOficinas.find((uo) => uo.idUsuario === usuarioOficina.idUsuario && uo.idOficina === usuarioOficina.idOficina);
         if (existeEmpleadoOficina) {
             throw new Error('El empleado ya pertenece a esta oficina');
