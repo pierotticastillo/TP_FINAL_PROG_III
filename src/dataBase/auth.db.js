@@ -26,6 +26,9 @@ export const findUser = async (email, password) => {
 export const findById = async (idUsuario) => {
     try {
         const [usuario] = await pool.query(`SELECT u.idUsuario, u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.activo FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo WHERE u.idUsuario = ? AND u.activo = 1`, [idUsuario]);
+        if (usuario.length === 0) {
+            return null; // No se encontró el usuario
+        }
         return usuario;
     } catch (error) {
         console.error("Error al buscar el usuario en la base de datos:", error.message);
