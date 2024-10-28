@@ -87,7 +87,14 @@ export const update = async (req, res) => {
         const usuario = {};
         if (nombre) usuario.nombre = nombre;
         if (apellido) usuario.apellido = apellido;
-        if (correoElectronico) usuario.correoElectronico = correoElectronico;
+        const formatoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (correoElectronico) {
+            if (formatoEmail.test(correoElectronico)) {
+                usuario.correoElectronico = correoElectronico;
+            } else {
+                return res.status(400).json({ estado: "Falla", mensaje: "El correo electrónico no es válido" });
+            }
+        }
         if (contrasenia) usuario.contrasenia = contrasenia;
         usuario.imagen = imagen === "" ? null : imagen;
         const usuarioActualizado = await usuariosServices.update(idUsuario, usuario);
