@@ -13,7 +13,7 @@ export const getEstadistica = async (req, res) => {
 
 export const downloadCSV = async (req, res) => {
     try {
-        const results = await estadisticaServices.getFile();
+        const results = await estadisticaServices.getEstadistica();
         if (!results || results.length === 0) {
             return res.status(404).send('No se encontraron reclamos.');
         }
@@ -44,7 +44,7 @@ export const downloadPDF = async (req, res) => {
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=estadisticaReclamos.pdf');
     try {
-        const results = await estadisticaServices.getFile();
+        const results = await estadisticaServices.getEstadistica();
         // Título principal
         doc.fontSize(25).text('Informe de Reclamos por Estado', { align: 'center' });
         doc.moveDown();
