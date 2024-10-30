@@ -11,47 +11,6 @@ const authenticate = passport.authenticate('jwt', { session: false });
 
 const router = express.Router();
 
-
-/**
- * @swagger
- * /usuarios:
- *   get:
- *     tags:
- *       - Usuarios
- *     summary: Obtener todos los usuarios
- *     description: Devuelve una lista de todos los usuarios del sistema. Solo accesible para administradores.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de usuarios
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   nombre:
- *                     type: string
- *                     example: "Lionel"
- *                   apellido:
- *                     type: string
- *                     example: "Messi"
- *                   correoElectronico:
- *                     type: string
- *                     example: "lionel.messi@ejemplo.com"
- *                   tipoUsuario:
- *                     type: string
- *                     example: "Administrador"
- *       401:
- *         description: No autorizado, se requiere autenticación
- *       403:
- *         description: Prohibido, solo los administradores tienen acceso
- */
 router.get('/:usuariotipo', [authenticate, administradorMiddleware.esAdministrador], usuariosController.getAll);
 // router.get('/', usuariosController.getAll);
 
