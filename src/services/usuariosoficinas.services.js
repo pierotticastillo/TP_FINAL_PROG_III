@@ -1,4 +1,4 @@
-import * as usuariosOficinasDataBase from "../dataBase/usuariosOficinas.db.js";
+import * as usuariosOficinasDataBase from "../dataBase/usuariosoficinas.db.js";
 import * as usuariosServices from "../services/usuarios.services.js";
 import * as oficinaServices from "../services/oficinas.services.js";
 

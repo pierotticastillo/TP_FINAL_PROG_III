@@ -1,5 +1,4 @@
 import * as estadisticaServices from '../services/estadistica.services.js';
-import { Parser } from 'json2csv';
 import PDFDocument from 'pdfkit';
 
 export const getEstadistica = async (req, res) => {
