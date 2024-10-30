@@ -2,17 +2,18 @@ import * as usuariosServices from '../services/usuarios.services.js';
 
 export const getAll = async (req, res) => {
     try {
-        const validColumns = ['idUsuario', 'nombre', 'apellido', 'correoelectronico']; // Lista de columnas válidas para el parámetro order
-        // Definir los parámetros con validación
-        const parameters = {
-            nombre: req.query.nombre,
-            apellido: req.query.apellido,
-            limit: Number.isInteger(parseInt(req.query.limit)) ? parseInt(req.query.limit) : 10,  // Valor por defecto
-            offset: Number.isInteger(parseInt(req.query.offset)) ? parseInt(req.query.offset) : 0,  // Valor por defecto
-            order: validColumns.includes(req.query.order) ? req.query.order : 'idUsuario',          // Ordenar por defecto
-            asc: (req.query.asc === 'ASC' || req.query.asc === 'DESC') ? req.query.asc : 'ASC'  // Asignar el valor validado de 'asc'
-        };
-        // Llamar al servicio con los parámetros validados
+        const parametrosadmitidos = ["empleados", "clientes"];
+        const usuarioTipo = req.params.usuariotipo;
+        if (!usuarioTipo || !parametrosadmitidos.includes(usuarioTipo)) {
+            return res.status(404).json({ estado: "Falla", mensaje: "Falta el tipo de usuario o el parametro es invalido" });
+        }
+        let parameters ;
+        if (usuarioTipo === "empleados"){
+            parameters = 2
+        }
+        else if (usuarioTipo === "clientes"){
+            parameters = 3
+        }
         const resultado = await usuariosServices.getAll(parameters);
         res.status(200).json({ estado: 'OK', dato: resultado });
     } catch (error) {

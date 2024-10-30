@@ -53,7 +53,10 @@ export const update = async (idUsuario, usuario) => {
 
 export const destroy = async (idUsuario) => {
     try {
-        await getById(idUsuario);
+        const empleadoRol = await getById(idUsuario);
+        if (empleadoRol.idUsuarioTipo !== 'Empleado') {
+            throw new Error(`No se puede eliminar un usuario ${empleadoRol.idUsuarioTipo}`);
+        }
         const destroyedUsuario = await usuariosDataBase.destroy(idUsuario);
         return destroyedUsuario;
     } catch (error) {

@@ -10,14 +10,14 @@
 			"name": "USUARIOS",
 			"item": [
 				{
-					"name": "GET ALL USUARIOS 1",
+					"name": "GET ALL USUARIOS",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAwNjQ2NzIsImV4cCI6MTczMDA2ODI3Mn0.fIFIr8P2DGL4YDkqDVEU4a5WaIiNRDfnKkVMm-lsAG0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAzMjcwMjQsImV4cCI6MTczMDMzMDYyNH0.99OPMT_4_MN7EAZ8JxRQhIjGaANe5q9ySH7EZb6aRRk",
 									"type": "string"
 								}
 							]
@@ -25,160 +25,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=20&offset=3",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/clientes",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"usuarios"
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "20"
-								},
-								{
-									"key": "offset",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL USUARIOS 2",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?nombre=a&apellido=a&limit=10&offset=0&order=apellido&asc=DESC",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usuarios"
-							],
-							"query": [
-								{
-									"key": "nombre",
-									"value": "a"
-								},
-								{
-									"key": "apellido",
-									"value": "a"
-								},
-								{
-									"key": "limit",
-									"value": "10"
-								},
-								{
-									"key": "offset",
-									"value": "0"
-								},
-								{
-									"key": "order",
-									"value": "apellido"
-								},
-								{
-									"key": "asc",
-									"value": "DESC"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL USUARIOS 3",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?limit=5&offset=0&asc=ASC",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usuarios"
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "5"
-								},
-								{
-									"key": "offset",
-									"value": "0"
-								},
-								{
-									"key": "asc",
-									"value": "ASC"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL USUARIOS 4",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=DESC",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usuarios"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "nombre"
-								},
-								{
-									"key": "asc",
-									"value": "DESC"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ALL USUARIOS Security",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios?order=nombre&asc=true",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"usuarios"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "nombre"
-								},
-								{
-									"key": "asc",
-									"value": "true"
-								}
+								"usuarios",
+								"clientes"
 							]
 						}
 					},
@@ -187,10 +42,20 @@
 				{
 					"name": "GET BY ID USUARIOS",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOjEzLCJlbWFpbCI6InBpZXJvdHRpY2FzdGlsbG9zYUBnbWFpbC5jb20iLCJ1c3VhcmlvVGlwbyI6IkFkbWluaXN0cmFkb3IiLCJpYXQiOjE3MzAzMjcwMjQsImV4cCI6MTczMDMzMDYyNH0.99OPMT_4_MN7EAZ8JxRQhIjGaANe5q9ySH7EZb6aRRk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/usuarios/idUsuario",
+							"raw": "{{BASE_URL}}/api/v1/usuarios/usuarioid/12",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -198,7 +63,8 @@
 								"api",
 								"v1",
 								"usuarios",
-								"idUsuario"
+								"usuarioid",
+								"12"
 							]
 						}
 					},

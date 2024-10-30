@@ -52,11 +52,11 @@ const router = express.Router();
  *       403:
  *         description: Prohibido, solo los administradores tienen acceso
  */
-router.get('/', [authenticate, administradorMiddleware.esAdministrador], usuariosController.getAll);
+router.get('/:usuariotipo', [authenticate, administradorMiddleware.esAdministrador], usuariosController.getAll);
 // router.get('/', usuariosController.getAll);
 
 // Obtener usuario por ID
-router.get('/:idUsuario', [authenticate, administradorMiddleware.esAdministrador], usuariosController.getById);
+router.get('/usuarioid/:idUsuario', [authenticate, administradorMiddleware.esAdministrador], usuariosController.getById);
 
 // Crear usuario empleado
 router.post('/creacionempleado',

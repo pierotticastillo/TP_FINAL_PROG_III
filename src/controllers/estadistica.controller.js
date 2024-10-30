@@ -22,11 +22,11 @@ export const downloadCSV = async (req, res) => {
         csvContent += 'Estado;Total de Reclamos\n'; // Encabezados de columnas
         // Agregar los datos
         results.forEach(row => {
-            csvContent +=` ${ row.Estado };${ row.Total } \n`;
+            csvContent += ` ${row.Estado};${row.Total} \n`;
         });
         // Agregar total general
         const totalReclamos = results.reduce((sum, row) => sum + row.Total, 0);
-        csvContent += `\nTotal General;${ totalReclamos }`;
+        csvContent += `\nTotal General;${totalReclamos}`;
         // Agregar BOM para caracteres especiales
         const BOM = '\uFEFF';
         const finalContent = BOM + csvContent;

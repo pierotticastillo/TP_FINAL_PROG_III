@@ -4,23 +4,8 @@ export const getAll = async (parameters) => {
     try {
         let consulta = `
             SELECT u.idUsuario, u.nombre, u.apellido, u.correoelectronico, ut.descripcion AS idUsuarioTipo, u.imagen FROM usuarios u INNER JOIN usuariostipo ut ON u.idUsuarioTipo = ut.idUsuarioTipo 
-            WHERE u.activo = 1`;
-        const conditions = [];
-        const values = [];
-        if (parameters.nombre) {
-            conditions.push(`u.nombre LIKE ?`);
-            values.push(`%${parameters.nombre}%`);
-        }
-        if (parameters.apellido) {
-            conditions.push(`u.apellido LIKE ?`);
-            values.push(`%${parameters.apellido}%`);
-        }
-        if (conditions.length > 0) {
-            consulta += ' AND ' + conditions.join(' AND ');
-        }
-        consulta += ` ORDER BY ${parameters.order} ${parameters.asc} LIMIT ? OFFSET ?`;
-        values.push(parameters.limit, parameters.offset);
-        const [resultado] = await pool.query(consulta, values);
+            WHERE u.activo = 1 AND u.idUsuarioTipo = ?`;
+        const [resultado] = await pool.query(consulta, parameters);
         if (resultado.length === 0) {
             throw new Error("Usuarios no encontrados");
         }
