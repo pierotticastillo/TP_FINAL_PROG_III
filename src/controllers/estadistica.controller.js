@@ -23,9 +23,9 @@ export const downloadCSV = async (req, res) => {
 };
 
 export const downloadPDF = async (req, res) => {
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=estadisticaReclamos.pdf');
     try {
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=estadisticaReclamos.pdf');
         const pdfStream = await estadisticaServices.generatePDF();
         pdfStream.pipe(res);
         pdfStream.end();
