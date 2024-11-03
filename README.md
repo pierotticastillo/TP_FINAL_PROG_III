@@ -2,11 +2,11 @@
 # FCAD - UNER
 # PROFESORES
 - NOVELLO PELAYO, Ignacio Luis.
-- FAURE, Dario Cristian.
+- FAURE, Cristian Dario.
 # INTEGRANTES DEL GRUPO
 - CONTRERAS, Pablo.
 - DAGATTI, Marianela.
-- OLIVERA, Liria Marlene
+- OLIVERA, Liria Marlene.
 - PIEROTTI CASTILLO, Enrique Alejandro.
 - ROSAS, Alejo Leonardo.
 - ZULUAGA PELAEZ, Mónica. 
