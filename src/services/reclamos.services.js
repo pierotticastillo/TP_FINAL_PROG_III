@@ -40,8 +40,7 @@ export const getByIdByUser = async (idReclamo, idUsuario) => {
         if (reclamo[0].idUsuarioCreador != idUsuario) {
             throw new Error("El reclamo no pertenece al cliente");
         }
-        const reclamoByUser = reclamo;
-        return reclamoByUser;
+        return reclamo;
     } catch (error) {
         console.error("Error al obtener los reclamos de un usuario en la base de datos:", error.message);
         throw new Error("No se pudieron obtener los reclamos de un usuario en la base de datos");
@@ -61,7 +60,7 @@ export const create = async (reclamo) => {
 
 export const updateByUser = async (idReclamo, idUsuarioCreador) => {
     try {
-        const reclamoActual = await getById(idReclamo);
+        const reclamoActual = await getByIdByUser(idReclamo, idUsuarioCreador);
         console.log(reclamoActual);
         if (reclamoActual[0].estadoReclamo === "Cancelado") {
             throw new Error("El reclamo ya fue cancelado");
