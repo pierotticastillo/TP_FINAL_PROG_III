@@ -66,14 +66,14 @@ export const create = async (req, res) => {
 };
 
 
-export const updateUser = async (req, res) => {
+export const updateByUser = async (req, res) => {
     try {
         const idReclamo = req.body.idReclamo;
         const idUsuarioCreador = req.user.idUsuario;
         if (!idReclamo) {
             return res.status(400).json({ estado: "Falla", mensaje: "Falta el ID del reclamo que desea actualizar" });
         }
-        const reclamoActualizado = await reclamosServices.updateUser(idReclamo, idUsuarioCreador);
+        const reclamoActualizado = await reclamosServices.updateByUser(parseInt(idReclamo), idUsuarioCreador);
         res.status(201).json({ estado: "OK", mensaje: "El reclamo fue actualizado exitosamente", dato: reclamoActualizado });
     } catch (error) {
         console.error("Error en el servidor:", error);
@@ -81,7 +81,7 @@ export const updateUser = async (req, res) => {
     }
 };
 
-export const updateEmployee = async (req, res) => {
+export const updateByEmployee = async (req, res) => {
     try {
         const idUsuario = req.user.idUsuario;
         const { idReclamo, idReclamoEstado } = req.body;
@@ -97,7 +97,7 @@ export const updateEmployee = async (req, res) => {
         if (!estadosValidos.includes(estado)) {
             return res.status(400).json({ estado: "Falla", mensaje: "El estado del reclamo debe ser uno de los siguientes: 2 (En proceso), 4 (Resuelto)" });
         }
-        const reclamoActualizado = await reclamosServices.updateEmployee(idReclamo, estado, idUsuario);
+        const reclamoActualizado = await reclamosServices.updateByEmployee(parseInt(idReclamo), estado, idUsuario);
         res.status(201).json({ estado: "OK", mensaje: "El reclamo fue actualizado exitosamente", dato: reclamoActualizado });
     } catch (error) {
         console.error("Error en el servidor:", error);

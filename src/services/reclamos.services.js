@@ -59,14 +59,14 @@ export const create = async (reclamo) => {
     }
 };
 
-export const updateUser = async (idReclamo, idUsuarioCreador) => {
+export const updateByUser = async (idReclamo, idUsuarioCreador) => {
     try {
         const reclamoActual = await getById(idReclamo);
         console.log(reclamoActual);
         if (reclamoActual[0].estadoReclamo === "Cancelado") {
             throw new Error("El reclamo ya fue cancelado");
         }
-        const updatedReclamo = await reclamosDataBase.updateUser(idReclamo, idUsuarioCreador);
+        const updatedReclamo = await reclamosDataBase.updateByUser(idReclamo, idUsuarioCreador);
         const usuario = await usuariosService.getById(updatedReclamo[0].idUsuarioCreador)
         console.log(usuario);
         const datosCorreo = {
@@ -84,7 +84,7 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
     }
 };
 
-export const updateEmployee = async (idReclamo, estado, idUsuario) => {
+export const updateByEmployee = async (idReclamo, estado, idUsuario) => {
     try {
         const reclamoActual = await getById(idReclamo);
         console.log(reclamoActual);
@@ -99,7 +99,7 @@ export const updateEmployee = async (idReclamo, estado, idUsuario) => {
         if (!reclamoDelEmpleado) {
             throw new Error("El reclamo no pertenece al empleado");
         }
-        const updatedReclamo = await reclamosDataBase.updateEmployee(idReclamo, estado, idUsuario);
+        const updatedReclamo = await reclamosDataBase.updateByEmployee(idReclamo, estado, idUsuario);
         const usuario = await usuariosService.getById(updatedReclamo[0].idUsuarioCreador)
         console.log(usuario);
         const datosCorreo = {

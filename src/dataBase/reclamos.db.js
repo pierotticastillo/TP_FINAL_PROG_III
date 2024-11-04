@@ -72,7 +72,7 @@ export const create = async (reclamo) => {
     }
 };
 
-export const updateUser = async (idReclamo, idUsuarioCreador) => {
+export const updateByUser = async (idReclamo, idUsuarioCreador) => {
     try {
         const updatedReclamo = await pool.query(
             `UPDATE reclamos SET fechaCancelado = NOW(), idReclamoEstado = 3 WHERE idReclamo = ? AND idReclamoEstado = 1 AND idUsuarioCreador = ?;`, [idReclamo, idUsuarioCreador]
@@ -88,7 +88,7 @@ export const updateUser = async (idReclamo, idUsuarioCreador) => {
 };
 
 
-export const updateEmployee = async (idReclamo, estado, idUsuario) => {
+export const updateByEmployee = async (idReclamo, estado, idUsuario) => {
     try {        
         let query;
         let params;
