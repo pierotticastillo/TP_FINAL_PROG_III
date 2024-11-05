@@ -2,6 +2,7 @@ import * as reclamosDataBase from '../dataBase/reclamos.db.js';
 import * as reclamosTipoService from '../services/reclamostipos.services.js'
 import * as usuariosService from '../services/usuarios.services.js'
 import * as correoService from '../services/notificaciones.service.js'
+import * as oficinasService from '../services/oficinas.services.js'
 
 export const getAllByEmployee = async (idUsuario) => {
     try {
@@ -50,6 +51,11 @@ export const getByIdByUser = async (idReclamo, idUsuario) => {
 export const create = async (reclamo) => {
     try {
         await reclamosTipoService.getById(reclamo.idReclamoTipo);
+        const oficinas = await oficinasService.getAll() 
+        const reclamosOficina = oficinas.find((r) => r.idReclamoTipo === reclamo.idReclamoTipo);
+        if(!reclamosOficina){
+            throw new Error("No hay oficinas con el tipo de reclamo");
+        }
         const createdReclamo = await reclamosDataBase.create(reclamo);
         return createdReclamo;
     } catch (error) {
