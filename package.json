@@ -9,7 +9,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "CONTRERAS, Pablo; DAGATTI, Marianela; OLIVERA, Liria Marlene; PIEROTTI CASTILLO, Enrique Alejandro; ROSAS, Alejo Leonardo; ZULUAGA PELAEZ, Mónica",
+  "author": "DAGATTI, Marianela; OLIVERA, Liria Marlene; PIEROTTI CASTILLO, Enrique Alejandro; ROSAS, Alejo Leonardo; ZULUAGA PELAEZ, Mónica",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
