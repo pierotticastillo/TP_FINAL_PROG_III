@@ -56,12 +56,12 @@ PASS_CORREO=ponersucontraseñadeaplicaciones
 
 ### 1️⃣ Clonar el Repositorio
 ```sh
-git clone https://github.com/usuario/tp_final_prog_iii.git
+git clone https://github.com/pierotticastillo/TP_FINAL_PROG_III.git
 ```
 
 ### 2️⃣ Instalar Dependencias
 ```sh
-cd tp_final_prog_iii
+cd TP_FINAL_PROG_III
 npm install
 ```
 
