@@ -114,3 +114,7 @@ http://localhost:3000/api-docs
 ```
 
 ---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más detalles.
